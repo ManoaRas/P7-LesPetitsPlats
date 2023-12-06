@@ -1,0 +1,25 @@
+.search {
+  &--title {
+    position: absolute;
+    top: 170px;
+    left: 170px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #FFD15B;
+    font-weight: 700;
+    font-size: 32px;
+  }
+  &--image {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.cards {
+  &--image {
+    height: 100px;
+    width: 100px;
+  }
+}

@@ -1,14 +1,13 @@
 import { SetAtt } from '../utils/DOMUtil.js';
 
 export class RecipeView {
-  constructor(data) {
-    this.data = data;
+  constructor() {
     this.cards = document.querySelector('.cards')
   }
 
   _getImage(image, name) {
     const img = document.createElement('img');
-    SetAtt(img, "src", `assets/${image}`);
+    SetAtt(img, "src", `assets/images/cards/${image}`);
     SetAtt(img, "alt", name);
     img.classList.add('cards--image');
     return img;
@@ -40,7 +39,7 @@ export class RecipeView {
     const recipeDescription = document.createElement('div');
     recipeDescription.classList.add('cards__infos--description');
 
-    const recipeDescriptionTitle = document.createElement('h3');
+    const recipeDescriptionTitle = document.createElement('h4');
     recipeDescriptionTitle.classList.add('cards__infos--description--title');
     recipeDescriptionTitle.textContent = 'RECETTE';
 
@@ -56,7 +55,7 @@ export class RecipeView {
     const recipeIngredients = document.createElement('div');
     recipeIngredients.classList.add('cards__infos--ingredient');
 
-    const recipeIngredientsTitle = document.createElement('h3');
+    const recipeIngredientsTitle = document.createElement('h4');
     recipeIngredientsTitle.classList.add('cards__infos--ingredient--title');
     recipeIngredientsTitle.textContent = 'INGRÉDIENTS';
 

@@ -1,0 +1,36 @@
+.header__logo {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+.header__logo img {
+  width: 250px;
+}
+
+.search--title {
+  position: absolute;
+  top: 170px;
+  left: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #FFD15B;
+  font-weight: 700;
+  font-size: 32px;
+}
+.search--image {
+  height: 100%;
+  width: 100%;
+}
+
+.cards--image {
+  height: 100px;
+  width: 100px;
+}
+
+body {
+  margin: 0;
+}
+
+/*# sourceMappingURL=style.css.map */

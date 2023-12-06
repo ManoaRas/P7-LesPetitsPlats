@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "sass": "sass --watch ./stylesheets/sass/main.scss:./stylesheets/css/style.css",
+    "sass": "sass --watch ./assets/stylesheets/sass/main.scss:./assets/stylesheets/css/style.css",
     "eslint": "^8.50.0",
     "lint": "eslint .",
     "lint:fix": "eslint --fix ."

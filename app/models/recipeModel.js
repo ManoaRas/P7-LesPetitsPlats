@@ -1,4 +1,4 @@
-import { RecipeView } from '../views/recipeView.js'
+import { RecipeView } from '../views/recipeView.js';
 
 export class RecipeModel {
   constructor(recipe) {
