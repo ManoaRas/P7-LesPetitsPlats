@@ -1,36 +1,173 @@
-.header__logo {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-}
-.header__logo img {
-  width: 250px;
-}
-
-.search--title {
-  position: absolute;
-  top: 170px;
-  left: 170px;
+.cards {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
   justify-content: center;
-  text-align: center;
-  color: #FFD15B;
-  font-weight: 700;
-  font-size: 32px;
-}
-.search--image {
-  height: 100%;
-  width: 100%;
+  gap: 50px;
 }
 
-.cards--image {
-  height: 100px;
-  width: 100px;
+.card {
+  position: relative;
+  width: 27%;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: 0.5s;
+  box-shadow: 0 0 24px 12px #C6C6C6;
+}
+.card--image {
+  height: 200px;
+  width: 100%;
+  border-radius: 20px 20px 0 0;
+  object-fit: cover;
+}
+.card--time {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 15px;
+  border-radius: 15px;
+  font-size: 12px;
+  background: #FFD15B;
+}
+.card__recipe {
+  margin: 0 20px;
+}
+.card__recipe--name {
+  color: #1B1B1B;
+  font-size: 18px;
+}
+.card__recipe__infos--title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #7A7A7A;
+}
+.card__recipe__infos--description {
+  color: #1B1B1B;
+  font-size: 14px;
+  min-height: 15rem;
+}
+.card__recipe__infos__list {
+  columns: 2;
+  padding: 0;
+  font-size: 14px;
+  list-style: none;
+}
+.card__recipe__infos__list__item {
+  margin-bottom: 20px;
+}
+.card__recipe__infos__list__item--text {
+  color: #1B1B1B;
+}
+.card__recipe__infos__list__item--quantity {
+  color: #7A7A7A;
+}
+
+.search {
+  background-image: url("../../../../assets/images/les-petits-plats.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.search--logo {
+  display: flex;
+  padding: 30px;
+}
+.search__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.search__header--title {
+  color: #FFD15B;
+  font-size: 44px;
+  text-align: center;
+  margin: auto;
+  width: 890px;
+  padding: 30px;
+}
+.search__header__bar {
+  display: flex;
+  border-radius: 10px;
+  width: 80%;
+}
+.search__header__bar--label {
+  display: block;
+  visibility: hidden;
+  height: 40px;
+  width: 40px;
+}
+.search__header__bar--input {
+  height: 50px;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  text-indent: 2rem;
+  font-size: 1rem;
+  color: #7A7A7A;
+}
+.search__header__bar--research {
+  cursor: pointer;
+  position: relative;
+  top: 6px;
+  right: 46px;
+  height: 40px;
+  width: 40px;
+  border: none;
+  border-radius: 10px;
+  color: #C6C6C6;
+  background-color: #1B1B1B;
+}
+
+.tags__filter {
+  display: flex;
+  justify-content: space-between;
+  margin: 50px;
+}
+.tags__filter__container {
+  display: flex;
+}
+.tags__filter__container__dropdown {
+  margin-right: 20px;
+}
+.tags__filter__container__dropdown--btn {
+  border: none;
+  color: #1B1B1B;
+  font-size: 18px;
+}
+.tags__filter--number {
+  margin: 0;
+  color: #1B1B1B;
+  font-size: 22px;
+}
+
+.fa-chevron-down {
+  margin-left: 30px;
 }
 
 body {
   margin: 0;
+  font-family: "Manrope", sans-serif;
+  scroll-behavior: smooth;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+}
+footer .on-top {
+  margin: 30px;
+  color: #1B1B1B;
+}
+
+a {
+  text-decoration: none;
+}
+
+h2 {
+  font-family: "Anton", sans-serif;
+  font-weight: 400;
 }
 
 /*# sourceMappingURL=style.css.map */

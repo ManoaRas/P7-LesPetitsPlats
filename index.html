@@ -1,52 +1,63 @@
 <!DOCTYPE html>
 <html lang="fr">
   <head>
+    <!-- Meta -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Google Fonts - Lato + DM Sans -->
-    <!-- <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Lato:wght@100;300;400;700;900&family=Roboto:wght@100;300;400;500;700;900&display=swap"
-      rel="stylesheet"
-    > -->
-    <!-- Style sheet -->
-    <link href="./assets/stylesheets/css/style.css" rel="stylesheet" type="text/css" />
-    <!-- Infos -->
-    <title>Les petits plats - Recettes de cuisine</title>
     <meta name="description" content="Application de recettes de cuisine">
+
+    <!-- Link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@500;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="./assets/images/favicon.png">
+    <link href="./assets/stylesheets/css/style.css" rel="stylesheet" type="text/css" />
+
+    <!-- Title -->
+    <title>Les petits plats - Recettes de cuisine</title>
+
+    <!-- Script -->
     <script type="module" src="./app/pages/index.js"></script>
     <script src="https://kit.fontawesome.com/d04d37ffe8.js" crossorigin="anonymous"></script>
   </head>
 
   <body>
     <!-- Header -->
-    <header class="header">
+    <header>
       <!-- Search section -->
       <section class="search">
-        <img class="search--image" src="assets/images/les-petits-plats.png" />
-        <div>
-          <!-- Logo -->
-          <a href="./index.html" class="header__logo">
-            <img src="assets/images/logo.svg" alt="Les petits plats logo">
-          </a>
+        <!-- Logo -->
+        <a href="./index.html" class="search--logo">
+          <img src="assets/images/logo.svg" alt="Les petits plats logo">
+        </a>
+        <div class="search__header">
           <!-- Title -->
-          <h2 class="search--title">
-            CHERCHEZ PARMI PLUS DE 1500 RECETTES <br /> DU QUOTIDIEN, SIMPLES ET DÉLICIEUSES
+          <h2 class="search__header--title">
+            CHERCHEZ PARMI PLUS DE 1500 RECETTES DU QUOTIDIEN, SIMPLES ET DÉLICIEUSES
           </h2>
-          <!-- Main search section-->
-          <div class="search--bar"></div>
+          <!-- Search -->
+          <div class="search__header__bar"></div>
         </div>
-        <!-- Tags selected section -->
-        <div class="search--filter"></div>
-        <!-- Tags search section -->
-        <div class="search--container"></div>
+        <div style="height: 100px;"></div>
       </section>
     </header>
-  </body>
 
-  <main id="main">
-    <!-- Cards section -->
-    <section class="cards"></section>
-  </main>
+    <main>
+      <section class="tags">
+        <!-- Tags selected -->
+        <div class="tags__filter"></div>
+        <!-- Tags search -->
+        <div class="tags__container"></div>
+      </section>
+      <!-- Cards section -->
+      <section class="cards"></section>
+    </main>
+
+    <footer>
+      <a href="#" class="on-top">
+        <i class="fa fa-chevron-up"></i>
+      </a>
+    </footer>
+  </body>
 </html>

@@ -3,25 +3,13 @@ import { SetAtt } from '../utils/DOMUtil.js';
 export class SearchTagView {
   constructor() {
     // DOM Elements
-    this.searchTagFilter = document.querySelector('.search--filter');
-    this.searchTagContainer = document.querySelector('.search--container');
-  }
-
-  _getDropdown(label, tags) {
-    const dropdown = document.createElement('div');
-    dropdown.classList.add('search--filter__dropdown');
-
-    const button = this._getButton(label);
-    const searchTag = this._getSearchTags(label);
-    const searchTagList = this._getSearchTagsList(tags);
-
-    dropdown.append(button, searchTag, searchTagList);
-    return dropdown;
+    this.tagsFilter = document.querySelector('.tags__filter');
+    this.tagsContainer = document.querySelector('.tags__container');
   }
 
   _getButton(label) {
     const button = document.createElement('button');
-    button.classList.add('search--filter__dropdown--btn');
+    button.classList.add('tags__filter__container__dropdown--btn');
     button.textContent = `${label}s`;
 
     const icon = document.createElement('i');
@@ -34,7 +22,7 @@ export class SearchTagView {
 
   _getSearchTags(label) {
     const div = document.createElement('div');
-    div.classList.add('search--filter__dropdown--tag');
+    div.classList.add('tags__filter__container__dropdown--tag');
     SetAtt(div, 'style', 'display: none');
 
     // Item label + icon
@@ -51,7 +39,7 @@ export class SearchTagView {
     const inputItem = document.createElement('input');
     SetAtt(inputItem, 'id', `${label.toLowerCase()}`);
     SetAtt(inputItem, 'placeholder', `recherchez un ${label.toLowerCase()}...`);
-    inputItem.classList.add('search--filter__dropdown--tag--input');
+    inputItem.classList.add('tags__filter__container__dropdown--tag--input');
 
     div.append(divItem, inputItem);
     return div;
@@ -59,7 +47,7 @@ export class SearchTagView {
 
   _getSearchTagsList(tags) {
     const div = document.createElement('div');
-    div.classList.add('search--filter__dropdown--list');
+    div.classList.add('tags__filter__container__dropdown--list');
     const unorderedList = document.createElement('ul');
     SetAtt(unorderedList, 'style', 'display: none');
 
@@ -76,6 +64,18 @@ export class SearchTagView {
     return div;
   }
 
+  _getDropdown(label, tags) {
+    const dropdown = document.createElement('div');
+    dropdown.classList.add('tags__filter__container__dropdown');
+
+    const button = this._getButton(label);
+    const searchTag = this._getSearchTags(label);
+    const searchTagList = this._getSearchTagsList(tags);
+
+    dropdown.append(button, searchTag, searchTagList);
+    return dropdown;
+  }
+
   _getIngredients(ingredients) {
     return this._getDropdown('Ingrédient', ingredients);
   }
@@ -88,13 +88,32 @@ export class SearchTagView {
     return this._getDropdown('Ustensile', ustensils);
   }
 
-  displaySearchTag(ingredients, appliance, ustensils) {
-    const searchTagFilter = this.searchTagFilter;
+  _getRecipeNumber(count) {
+    const recipeNumber = document.createElement('h2')
+    recipeNumber.classList.add('tags__filter--number')
+    recipeNumber.textContent = `${count} recettes`;
+    return recipeNumber
+  }
+
+  displaySearchTag(ingredients, appliance, ustensils, count) {
+    const tagsFilter = this.tagsFilter;
+
+    // Container dropdown tags filter
+    const tagsFilterContainer = document.createElement('div');
+    tagsFilterContainer.classList.add('tags__filter__container');
+
+    // Dropdown tags filter
     const ingredientItems = this._getIngredients(ingredients);
     const applianceItems = this._getAppliance(appliance);
     const ustensilItems = this._getUstensils(ustensils);
 
-    searchTagFilter.append(ingredientItems, applianceItems, ustensilItems);
-    return searchTagFilter;
+    // Recipe Number
+    const recipeNumber = this._getRecipeNumber(count);
+
+    // Append methods
+    tagsFilterContainer.append(ingredientItems, applianceItems, ustensilItems);
+    tagsFilter.append(tagsFilterContainer, recipeNumber);
+
+    return tagsFilter;
   }
 }

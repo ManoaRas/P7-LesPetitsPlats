@@ -3,6 +3,7 @@ import { SearchTagView } from '../views/searchTagView.js';
 export class SearchTagModel {
   constructor(tags) {
     this.tags = tags
+    this.count = tags.length
   }
 
   // Unique ingredient list function
@@ -50,6 +51,6 @@ export class SearchTagModel {
     // uniqueUstensils.forEach(el => console.log('ustensil :', el));
 
     const searchTagView = new SearchTagView();
-    searchTagView.displaySearchTag(uniqueIngredients, uniqueAppliances, uniqueUstensils);
+    searchTagView.displaySearchTag(uniqueIngredients, uniqueAppliances, uniqueUstensils, this.count);
   }
 }

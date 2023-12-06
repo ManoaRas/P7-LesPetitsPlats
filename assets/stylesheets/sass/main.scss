@@ -1,6 +1,7 @@
-@import "./components/header.scss";
-@import "./components/image.scss";
+@import "./abstracts/variables.scss";
 
-body {
-  margin: 0;
-}
+@import "./components/cards.scss";
+@import "./components/search.scss";
+@import "./components/tags.scss";
+
+@import "./base.scss";

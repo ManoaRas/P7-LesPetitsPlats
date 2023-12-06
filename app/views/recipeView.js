@@ -9,23 +9,23 @@ export class RecipeView {
     const img = document.createElement('img');
     SetAtt(img, "src", `assets/images/cards/${image}`);
     SetAtt(img, "alt", name);
-    img.classList.add('cards--image');
+    img.classList.add('card--image');
     return img;
   }
 
   _getTime(time) {
-    const span = document.createElement('span');
-    span.classList.add('cards--time');
-    span.textContent = `${time} min`;
-    return span;
+    const timeDiv = document.createElement('div');
+    timeDiv.classList.add('card--time');
+    timeDiv.textContent = `${time} min`;
+    return timeDiv;
   }
 
   _getInfos(name, description, ingredients) {
     const recipe = document.createElement('div');
-    recipe.classList.add('cards__infos');
+    recipe.classList.add('card__recipe');
 
     const recipeName = document.createElement('h2');
-    recipeName.classList.add('cards__infos--name');
+    recipeName.classList.add('card__recipe--name');
     recipeName.textContent = name;
 
     const recipeDescription = this._getInfosDescription(description);
@@ -37,14 +37,14 @@ export class RecipeView {
 
   _getInfosDescription(description) {
     const recipeDescription = document.createElement('div');
-    recipeDescription.classList.add('cards__infos--description');
+    recipeDescription.classList.add('card__recipe__infos');
 
     const recipeDescriptionTitle = document.createElement('h4');
-    recipeDescriptionTitle.classList.add('cards__infos--description--title');
+    recipeDescriptionTitle.classList.add('card__recipe__infos--title');
     recipeDescriptionTitle.textContent = 'RECETTE';
 
     const recipeDescriptionText = document.createElement('p');
-    recipeDescriptionText.classList.add('cards__infos--description--text');
+    recipeDescriptionText.classList.add('card__recipe__infos--description');
     recipeDescriptionText.textContent = description;
 
     recipeDescription.append(recipeDescriptionTitle, recipeDescriptionText);
@@ -53,34 +53,49 @@ export class RecipeView {
 
   _getInfosIngredient(ingredients) {
     const recipeIngredients = document.createElement('div');
-    recipeIngredients.classList.add('cards__infos--ingredient');
+    recipeIngredients.classList.add('card__recipe__infos');
 
     const recipeIngredientsTitle = document.createElement('h4');
-    recipeIngredientsTitle.classList.add('cards__infos--ingredient--title');
+    recipeIngredientsTitle.classList.add('card__recipe__infos--title');
     recipeIngredientsTitle.textContent = 'INGRÉDIENTS';
 
-    const recipeIngredientsText = document.createElement('ul');
-    recipeIngredientsText.classList.add('cards__infos--ingredient--text');
+    const recipeIngredientsList = document.createElement('ul');
+    recipeIngredientsList.classList.add('card__recipe__infos__list');
 
     ingredients.forEach((ingredient) => {
       const ingredientList = document.createElement('li');
-      const ingredientText = `${ingredient.ingredient} ${ingredient.quantity ? `${ingredient.quantity}` : ''} ${ingredient.unit ? `${ingredient.unit}` : ''}`
+      ingredientList.classList.add('card__recipe__infos__list__item');
 
-      ingredientList.textContent = ingredientText;
-      recipeIngredientsText.appendChild(ingredientList);
+      const ingredientListText = document.createElement('span');
+      ingredientListText.classList.add('card__recipe__infos__list__item--text');
+      const ingredientListQuantity = document.createElement('span');
+      ingredientListQuantity.classList.add('card__recipe__infos__list__item--quantity');
+
+      const breakRow = document.createElement('br');
+
+      ingredientListText.textContent = `${ingredient.ingredient ? `${ingredient.ingredient}` : ' '}`;
+      ingredientListQuantity.textContent = `${ingredient.quantity ? `${ingredient.quantity}` : ' '} ${ingredient.unit ? `${ingredient.unit}` : ' '}`;
+
+      ingredientList.append(ingredientListText, breakRow, ingredientListQuantity);
+      recipeIngredientsList.appendChild(ingredientList);
     });
 
-    recipeIngredients.append(recipeIngredientsTitle, recipeIngredientsText);
+    recipeIngredients.append(recipeIngredientsTitle, recipeIngredientsList);
     return recipeIngredients;
   }
 
   displayRecipe(image, name, time, description, ingredients) {
     const cards = this.cards;
+
     const images = this._getImage(image, name);
     const times = this._getTime(time);
     const infos = this._getInfos(name, description, ingredients);
 
-    cards.append(images, times, infos)
+    const card = document.createElement('article');
+    card.classList.add('card');
+    card.append(images, times, infos);
+
+    cards.appendChild(card);
     return cards;
   }
 }
