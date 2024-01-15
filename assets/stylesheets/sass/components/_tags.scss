@@ -1,27 +1,120 @@
 .tags {
+  max-height: 153px;
   &__filter {
     display: flex;
     justify-content: space-between;
-    margin: 50px;
+    align-items: flex-start;
+    padding: 50px;
     &__container {
       display: flex;
       &__dropdown {
-        margin-right: 20px;
+        margin: 0 10px;
         &--btn {
+          cursor: pointer;
+          display: block;
+          width: 100%;
           border: none;
           color: $primary;
+          background-color: white;
           font-size: 18px;
+          padding: 15px;
+          border-radius: 10px;
+        }
+        &__tag {
+          position: relative;
+          z-index: 1;
+          &--btn {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 230px;
+            border: none;
+            color: #1B1B1B;
+            background-color: white;
+            font-size: 18px;
+            padding: 15px;
+            border-radius: 10px 10px 0 0;
+            &__list {
+              background-color: white;
+              max-height: 300px;
+              overflow: auto;
+              border-radius: 0 0 10px 10px;
+              position: relative;
+              top: -4px;
+              max-width: 230px;
+              &--item {
+                text-align: left;
+                font-size: 14px;
+                list-style: none;
+                padding: 0;
+              }
+            }
+            &--item {
+              cursor: pointer;
+              width: 100%;
+              display: flex;
+              justify-content: space-between;
+            }
+          }
+          &__div {
+            display: flex;
+            background-color: white;
+            position: relative;
+            top: -2px;
+            max-width: 230px;
+            &--label {
+              display: block;
+              visibility: hidden;
+              width: 15px;
+            }
+            &--input {
+              background: none;
+              width: 100%;
+              border: 1px solid $primary;
+              border-radius: 5px;
+              margin: 10px 0;
+              padding: 10px;
+            }
+            &--research {
+              cursor: pointer;
+              border: none;
+              background-color: transparent;
+              position: relative;
+              top: 25px;
+              right: 25px;
+              width: 15px;
+              height: 15px;
+              padding: 0;
+            }
+          }
         }
       }
     }
     &--number {
-      margin: 0;
+      margin: 10px 0;
       color: $primary;
       font-size: 22px;
     }
   }
 }
 
-.fa-chevron-down {
+.filter-list {
+  &--item {
+    cursor: pointer;
+    padding: 10px 15px;
+    transition: 0.5s;
+  }
+  &--item:hover {
+    background-color: $important;
+    color: $primary;
+    font-size: large;
+    font-weight: bold;
+    transition: 0.5s;
+  }
+}
+
+.fa-chevron-down, .fa-chevron-up {
   margin-left: 30px;
 }

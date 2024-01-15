@@ -1,4 +1,4 @@
-import { SetAtt } from '../utils/DOMUtil.js';
+import { SetAtt } from '../utils/domUtil.js';
 
 export class RecipeView {
   constructor() {

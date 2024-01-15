@@ -5,35 +5,20 @@ import { SearchBarModel } from '../models/searchBarModel.js';
 import { SearchTagModel } from '../models/searchTagModel.js';
 
 class IndexPage {
-  displaySearchBar() {
-    const searchBar = new SearchBarModel();
-    searchBar.render();
-  }
+  init() {
+    // Display search bar and search tag
+    new SearchBarModel().render;
+    new SearchTagModel(data).render();
 
-  displaySearchTag(recipes) {
-    const searchTag = new SearchTagModel(recipes);
-    searchTag.render();
-  }
-
-  displayIndexData(recipes) {
-    if (recipes) {
+    // Display all recipes
+    if (data) {
       // Generate Recipes Cards
-      recipes.forEach((recipe) => {
+      data.forEach((recipe) => {
         const card = new RecipeModel(recipe);
         card.render();
       });
     }
   }
-
-  init() {
-    // Display search bar and search tag
-    this.displaySearchBar();
-    this.displaySearchTag(data);
-
-    // Display all recipes
-    this.displayIndexData(data);
-  }
 }
 
-const indexPage = new IndexPage();
-indexPage.init();
+new IndexPage().init();

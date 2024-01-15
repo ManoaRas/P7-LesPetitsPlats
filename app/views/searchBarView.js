@@ -1,4 +1,4 @@
-import { SetAtt } from '../utils/DOMUtil.js';
+import { SetAtt } from '../utils/domUtil.js';
 
 export class SearchBarView {
   constructor() {
@@ -10,25 +10,25 @@ export class SearchBarView {
 
   _getLabel() {
     const label = document.createElement('label');
-    label.classList.add('search__header__bar--label');
     SetAtt(label, 'for', 'search-bar');
+    label.classList.add('search__header__bar--label');
     label.textContent = 'Rechercher une recette, un ingrédient, ...'
     return label
   }
 
   _getInput() {
     const input = document.createElement('input');
-    input.classList.add('search__header__bar--input')
-    SetAtt(input, 'type', 'text');
     SetAtt(input, 'id', 'search-bar');
+    SetAtt(input, 'type', 'text');
     SetAtt(input, 'placeholder', 'Rechercher une recette, un ingrédient, ...');
+    input.classList.add('search__header__bar--input')
     return input;
   }
 
   _getBtnSearch() {
     const btnSearch = document.createElement('button');
-    btnSearch.classList.add('search__header__bar--research');
     SetAtt(btnSearch, 'type', 'submit');
+    btnSearch.classList.add('search__header__bar--research');
 
     const iconSearch = document.createElement('i');
     iconSearch.classList.add('fa-solid');

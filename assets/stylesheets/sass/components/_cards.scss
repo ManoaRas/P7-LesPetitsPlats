@@ -11,7 +11,8 @@
   border-radius: 20px;
   overflow: hidden;
   transition: 0.5s;
-  box-shadow: 0 0 24px 12px $secondary-light;
+  box-shadow: 0 0 14px 7px $secondary-dark;
+  background-color: $secondary-light;
   &--image {
     height: 200px;
     width: 100%;
@@ -42,7 +43,6 @@
       &--description {
         color: $primary;
         font-size: 14px;
-        min-height: 15rem;
       }
       &__list {
         columns: 2;

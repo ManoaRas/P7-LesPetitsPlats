@@ -6,49 +6,32 @@ export class SearchTagModel {
     this.count = tags.length
   }
 
-  // Unique ingredient list function
-  _getUniqueIngredients(recipes) {
-    const ingredientsSet = new Set();
+  _getUniqueListByProperty(recipes, items) {
+    const uniqueSet = new Set();
 
-    recipes.forEach(recipe => {
-      recipe.ingredients.forEach(ingredient => {
-        ingredientsSet.add(ingredient.ingredient);
-      });
+    recipes.forEach((recipe) => {
+      if (recipe[items]) {
+        const itemsValue = recipe[items];
+
+        if (Array.isArray(itemsValue)) {
+          // Ingredients / Ustensils
+          itemsValue.forEach((item) => {
+            typeof(item === 'object') && item.ingredient ? uniqueSet.add(item.ingredient) : uniqueSet.add(item);
+          });
+        } else {
+          // Applicance
+          uniqueSet.add(itemsValue);
+        }
+      }
     });
 
-    return Array.from(ingredientsSet);
-  }
-  // Unique appliance list function
-  _getUniqueAppliances(recipes) {
-    const appliancesSet = new Set();
-
-    recipes.forEach(recipe => {
-      appliancesSet.add(recipe.appliance);
-    });
-
-    return Array.from(appliancesSet);
-  }
-  // Unique utensil list function
-  _getUniqueUstensils(recipes) {
-    const ustensilsSet = new Set();
-
-    recipes.forEach(recipe => {
-      recipe.ustensils.forEach(ustensil => {
-        ustensilsSet.add(ustensil);
-      });
-    });
-
-    return Array.from(ustensilsSet);
+    return Array.from(uniqueSet);
   }
 
   render() {
-    const uniqueIngredients = this._getUniqueIngredients(this.tags);
-    const uniqueAppliances = this._getUniqueAppliances(this.tags);
-    const uniqueUstensils = this._getUniqueUstensils(this.tags);
-
-    // uniqueIngredients.forEach(el => console.log('ingredient :', el));
-    // uniqueAppliances.forEach(el => console.log('appliance :', el));
-    // uniqueUstensils.forEach(el => console.log('ustensil :', el));
+    const uniqueIngredients = this._getUniqueListByProperty(this.tags, 'ingredients');
+    const uniqueAppliances = this._getUniqueListByProperty(this.tags, 'appliance');
+    const uniqueUstensils = this._getUniqueListByProperty(this.tags, 'ustensils');
 
     const searchTagView = new SearchTagView();
     searchTagView.displaySearchTag(uniqueIngredients, uniqueAppliances, uniqueUstensils, this.count);
