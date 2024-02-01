@@ -1,68 +1,63 @@
 import { SetAtt } from '../utils/domUtil.js';
 
-export class SearchTagView {
+export class TagView {
   constructor() {
     // DOM Elements
-    this.tagsFilter = document.querySelector('.tags__filter');
-    this.tagsContainer = document.querySelector('.tags__container');
+    this.tagsFilter = document.querySelector('.filters');
+    this.tagsContainer = document.querySelector('.tags');
+    this.itemList = null;
   }
 
   // GET METHODS
   _getSearchTagsBtn(label) {
     const searchTags = document.createElement('div');
-    searchTags.classList.add('tags__filter__container__dropdown__tag__div');
+    searchTags.classList.add('dropdown__tag__div');
     const labelName = label.toLowerCase();
-
-    // Item label
-    const labelItem = document.createElement('label');
-    SetAtt(labelItem, 'for', `${labelName}`);
-    labelItem.classList.add('tags__filter__container__dropdown__tag__div--label');
-    labelItem.textContent = `recherchez un ${labelName}...`;
 
     // Item input
     const inputItem = document.createElement('input');
-    SetAtt(inputItem, 'id', `${labelName}`);
+    SetAtt(inputItem, 'id', `${labelName}`)
     SetAtt(inputItem, 'type', 'text');
+    SetAtt(inputItem, 'tabindex', 0);
     SetAtt(inputItem, 'placeholder', `recherchez un ${labelName}...`);
-    inputItem.classList.add('tags__filter__container__dropdown__tag__div--input');
+    inputItem.classList.add('dropdown__tag__div--input');
 
     // Item btnIcon
     const btnIconItem = document.createElement('button');
-    SetAtt(btnIconItem, 'type', 'submit');
-    btnIconItem.classList.add('tags__filter__container__dropdown__tag__div--research');
+    SetAtt(btnIconItem, 'tabindex', 0);
+    btnIconItem.classList.add('dropdown__tag__div--research');
+
+    // Item icon
     const iconSearch = document.createElement('i');
     iconSearch.classList.add('fa-solid');
     iconSearch.classList.add('fa-magnifying-glass');
 
     btnIconItem.appendChild(iconSearch);
-    searchTags.append(labelItem, inputItem, btnIconItem)
+    searchTags.append(inputItem, btnIconItem)
     return searchTags;
   }
   _getSearchTagsList(tags) {
-    const searchTagsList = document.createElement('div');
-    searchTagsList.classList.add('tags__filter__container__dropdown__tag--btn__list');
-
     const unorderedList = document.createElement('ul');
-    unorderedList.classList.add('tags__filter__container__dropdown__tag--btn__list--item');
+    unorderedList.classList.add('dropdown__tag--btn__list');
+
     tags.forEach((tag) => {
       const tagList = document.createElement('li');
       tagList.textContent = tag.charAt(0).toUpperCase() + tag.slice(1); // toUpperCase()
       tagList.classList.add('filter-list--item');
-      SetAtt(tagList, 'id', `${tag}`);
+      SetAtt(tagList, 'tabindex', 0);
       unorderedList.appendChild(tagList);
     });
-    searchTagsList.appendChild(unorderedList);
-    return searchTagsList;
+    return unorderedList;
   }
   _getRecipeNumber(count) {
     const recipeNumber = document.createElement('h2')
-    recipeNumber.classList.add('tags__filter--number')
+    recipeNumber.classList.add('filters--number')
     recipeNumber.textContent = `${count} recettes`;
     return recipeNumber
   }
 
   // SET METHODS
-  _setToggleDropdown(label) {
+  _toggleDropdown(label) {
     let btnId = '';
     let listId = '';
 
@@ -86,32 +81,17 @@ export class SearchTagView {
     }
   }
   _setListTags(label, tags) {
-    let listId = '';
-    let btnId = '';
-    if (label === 'Ingrédient') {
-      listId = 'ingredient-list';
-      btnId = 'ingredient-list-btn';
-    } else if (label === 'Appareil') {
-      listId = 'appliance-list';
-      btnId = 'appliance-list-btn';
-    } else if (label === 'Ustensile') {
-      listId = 'ustensil-list';
-      btnId = 'ustensil-list-btn';
-    }
-
     const dropdownTag = document.createElement('div');
-    SetAtt(dropdownTag, 'id', listId);
-    dropdownTag.classList.add('tags__filter__container__dropdown__tag');
+    dropdownTag.classList.add('dropdown__tag');
     dropdownTag.style.display = 'none';
 
-    // Item label + icon
+    // Item btn + icon
     const button = document.createElement('button');
-    SetAtt(button, 'id', btnId);
-    button.classList.add(`tags__filter__container__dropdown__tag--btn`);
-    button.addEventListener('click', () => this._setToggleDropdown(label));
+    button.classList.add(`dropdown__tag--btn`);
+    button.addEventListener('click', () => this._toggleDropdown(label));
 
     const span = document.createElement('span');
-    span.classList.add('tags__filter__container__dropdown__tag--btn--item');
+    span.classList.add('dropdown--btn--item');
     span.textContent = `${label}s`;
 
     const icon = document.createElement('i');
@@ -129,25 +109,15 @@ export class SearchTagView {
   }
   _setDropdown(label, tags) {
     const dropdown = document.createElement('div');
-    dropdown.classList.add('tags__filter__container__dropdown');
-
-    let btnId = '';
-    if (label === 'Ingrédient') {
-    btnId = 'ingredient-btn';
-    } else if (label === 'Appareil') {
-      btnId = 'appliance-btn';
-    } else if (label === 'Ustensile') {
-      btnId = 'ustensil-btn';
-    }
+    dropdown.classList.add('dropdown');
 
     const button = document.createElement('button');
-    SetAtt(button, 'id', btnId);
-    button.classList.add('tags__filter__container__dropdown--btn');
-    button.addEventListener('click', () => this._setToggleDropdown(label));
+    button.classList.add('dropdown--btn');
+    button.addEventListener('click', () => this._toggleDropdown(label));
     button.style.display = 'block';
 
     const span = document.createElement('span');
-    span.classList.add('tags__filter__container__dropdown__tag--btn--item');
+    span.classList.add('dropdown--btn--item');
     span.textContent = `${label}s`;
 
     const icon = document.createElement('i');
@@ -166,7 +136,7 @@ export class SearchTagView {
   displaySearchTag(ingredients, appliance, ustensils, count) {
     // Container dropdown tags filter
     const tagsFilterContainer = document.createElement('div');
-    tagsFilterContainer.classList.add('tags__filter__container');
+    tagsFilterContainer.classList.add('filter__wrapper');
 
     // Dropdown tags filter
     const ingredientItems = this._setDropdown('Ingrédient', ingredients);

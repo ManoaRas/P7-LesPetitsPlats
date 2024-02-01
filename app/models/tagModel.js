@@ -1,6 +1,6 @@
-import { SearchTagView } from '../views/searchTagView.js';
+import { TagView } from '../views/tagView.js';
 
-export class SearchTagModel {
+export class TagModel {
   constructor(tags) {
     this.tags = tags
     this.count = tags.length
@@ -14,13 +14,11 @@ export class SearchTagModel {
         const itemsValue = recipe[items];
 
         if (Array.isArray(itemsValue)) {
-          // Ingredients / Ustensils
           itemsValue.forEach((item) => {
             typeof(item === 'object') && item.ingredient ? uniqueSet.add(item.ingredient) : uniqueSet.add(item);
-          });
+          }); // Ingredients / Ustensils
         } else {
-          // Applicance
-          uniqueSet.add(itemsValue);
+          uniqueSet.add(itemsValue); // Applicance
         }
       }
     });
@@ -33,7 +31,7 @@ export class SearchTagModel {
     const uniqueAppliances = this._getUniqueListByProperty(this.tags, 'appliance');
     const uniqueUstensils = this._getUniqueListByProperty(this.tags, 'ustensils');
 
-    const searchTagView = new SearchTagView();
-    searchTagView.displaySearchTag(uniqueIngredients, uniqueAppliances, uniqueUstensils, this.count);
+    const tagView = new TagView();
+    tagView.displaySearchTag(uniqueIngredients, uniqueAppliances, uniqueUstensils, this.count);
   }
 }

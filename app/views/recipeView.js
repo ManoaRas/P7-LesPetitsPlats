@@ -84,7 +84,7 @@ export class RecipeView {
     return recipeIngredients;
   }
 
-  displayRecipe(image, name, time, description, ingredients) {
+  displayRecipe(id, image, name, time, description, ingredients) {
     const cards = this.cards;
 
     const images = this._getImage(image, name);
@@ -93,8 +93,11 @@ export class RecipeView {
 
     const card = document.createElement('article');
     card.classList.add('card');
-    card.append(images, times, infos);
 
+    SetAtt(card, 'data-id', id);
+    SetAtt(card, 'data-display', 'block');
+
+    card.append(images, times, infos);
     cards.appendChild(card);
     return cards;
   }

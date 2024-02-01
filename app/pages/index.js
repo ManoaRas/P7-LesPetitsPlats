@@ -1,19 +1,18 @@
-import recipes from '../data/recipes.js';
-import data from '../data/recipes.js';
+import { recipes } from '../../data/recipes.js';
 import { RecipeModel } from '../models/recipeModel.js';
 import { SearchBarModel } from '../models/searchBarModel.js';
-import { SearchTagModel } from '../models/searchTagModel.js';
+import { TagModel } from '../models/tagModel.js';
 
 class IndexPage {
-  init() {
+  async init() {
     // Display search bar and search tag
-    new SearchBarModel().render;
-    new SearchTagModel(data).render();
+    new SearchBarModel().render();
+    new TagModel(recipes).render();
 
     // Display all recipes
-    if (data) {
+    if (recipes) {
       // Generate Recipes Cards
-      data.forEach((recipe) => {
+      recipes.forEach((recipe) => {
         const card = new RecipeModel(recipe);
         card.render();
       });
