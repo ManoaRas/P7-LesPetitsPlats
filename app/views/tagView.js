@@ -6,6 +6,7 @@ export class TagView {
     this.tagsFilter = document.querySelector('.filters');
     this.tagsContainer = document.querySelector('.tags');
     this.currentInput = null;
+    this.selectedTags = [];
   }
 
   // GENERAL METHODS
@@ -17,6 +18,48 @@ export class TagView {
   }
   _closeAllDropdowns(dropdownBtns) {
     dropdownBtns.forEach((btn) => this._toggleDropdown(btn, false));
+  }
+
+  // CREATE METHODS
+  _createList(tags, unorderedList) {
+    tags.forEach((tag) => {
+      const list = document.createElement('li');
+      list.classList.add('list--item');
+      SetAtt(list, 'tabindex', '0');
+      list.textContent = UpperFirstCase(tag);
+      list.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.target.style.display = 'none';
+        this.selectedTags.push(event.target.textContent)
+        this._createTagContainer();
+      });
+      unorderedList.appendChild(list);
+    });
+  }
+  _createTagContainer() {
+    // Vide le container avant de le recréer
+    this.tagsContainer.innerHTML = '';
+    this.selectedTags.forEach((tag) => {
+      const tagBtn = document.createElement('button');
+      const tagIcon = document.createElement('i');
+
+      tagBtn.classList.add('tags--button');
+      tagIcon.classList.add('fa-solid', 'fa-xmark');
+
+      tagBtn.textContent = UpperFirstCase(tag);
+
+      tagBtn.addEventListener('click', () => this._removeTag(tag));
+
+      tagBtn.append(tagIcon);
+      this.tagsContainer.appendChild(tagBtn);
+    });
+  }
+  _removeTag(tagNameToRemove) {
+    this.selectedTags = this.selectedTags.filter((tag) => tag !== tagNameToRemove);
+    this._createTagContainer();
+    document.querySelectorAll('.list--item').forEach((list) => {
+      if (list.textContent === UpperFirstCase(tagNameToRemove)) list.style.display = 'block';
+    });
   }
 
   // DEFINE METHODS
@@ -49,20 +92,9 @@ export class TagView {
     inputItem.addEventListener('input', () => {
       this.currentInput = LowerCase(label);
       const filteredTags = tags.filter((tag) => LowerCase(tag).includes(LowerCase(inputItem.value)));
-      const tagList = document.querySelector(`.${NormalizeString(this.currentInput)}-list`);
-      tagList.innerHTML = '';
-
-      filteredTags.forEach((tag) => {
-        const tagItem = document.createElement('li');
-        tagItem.classList.add('list--item');
-        tagItem.textContent = UpperFirstCase(tag);
-        SetAtt(tagItem, 'tabindex', '0');
-        tagItem.addEventListener('click', (event) => {
-          event.preventDefault();
-          event.target.style.display = 'none';
-        });
-        tagList.appendChild(tagItem);
-      });
+      const unorderedList = document.querySelector(`.${NormalizeString(this.currentInput)}-list`);
+      unorderedList.innerHTML = '';
+      this._createList(filteredTags, unorderedList);
     });
 
     btnDelItem.appendChild(iconDel);
@@ -73,18 +105,7 @@ export class TagView {
   _defineTagsList(label, tags) {
     const unorderedList = document.createElement('ul');
     unorderedList.classList.add('list', `${NormalizeString(label)}-list`);
-
-    tags.forEach((tag) => {
-      const tagList = document.createElement('li');
-      tagList.classList.add('list--item');
-      tagList.textContent = UpperFirstCase(tag);
-      SetAtt(tagList, 'tabindex', '0');
-      tagList.addEventListener('click', (event) => {
-        event.preventDefault();
-        event.target.style.display = 'none';
-      });
-      unorderedList.appendChild(tagList);
-    });
+    this._createList(tags, unorderedList);
     return unorderedList;
   }
   _defineRecipeNumber(count) {
@@ -145,6 +166,6 @@ export class TagView {
 
     tagsFilterContainer.append(ingredientItems, applianceItems, ustensilItems);
     this.tagsFilter.append(tagsFilterContainer, recipeNumber);
-    return this.tagsFilter;
+    return this.tagsFilter, this._createTagContainer();
   }
 }

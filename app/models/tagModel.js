@@ -1,3 +1,4 @@
+import { LowerCase } from '../utils/domUtil.js';
 import { TagView } from '../views/tagView.js';
 
 export class TagModel {
@@ -11,10 +12,10 @@ export class TagModel {
   }
 
   _addPropertyToSet(propertySet, value) {
-    return propertySet.add(value.toLowerCase());
+    return propertySet.add(LowerCase(value));
   }
   render() {
-    this.tags.forEach(recipe => {
+    this.tags.forEach((recipe) => {
       recipe.ingredients.forEach((ingredient) => this._addPropertyToSet(this.uniqueProperties.ingredients, ingredient.ingredient));
       this._addPropertyToSet(this.uniqueProperties.appliances, recipe.appliance);
       recipe.ustensils.forEach((ustensil) => this._addPropertyToSet(this.uniqueProperties.ustensils, ustensil));
@@ -26,6 +27,6 @@ export class TagModel {
       propertiesArray[property] = Array.from(this.uniqueProperties[property]).sort();
     }
 
-    return new TagView().displaySearchTag(propertiesArray, this.tags.length);
+    return new TagView(this.tags).displaySearchTag(propertiesArray, this.tags.length);
   }
 }

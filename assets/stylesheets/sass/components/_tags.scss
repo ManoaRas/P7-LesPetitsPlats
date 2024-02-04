@@ -107,6 +107,7 @@
 
 // Tags container sections
 .tags {
+  display: flex;
   gap: 20px;
   flex-wrap: wrap;
   margin: 25px 45px;
@@ -119,9 +120,7 @@
     background-color: $important;
     color: $primary;
     padding: 15px;
-    i {
-      margin-left: 15px;
-    }
+    i { margin-left: 15px }
   }
 }
 
