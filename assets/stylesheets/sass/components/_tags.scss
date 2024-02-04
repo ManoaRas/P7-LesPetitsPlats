@@ -1,15 +1,13 @@
-// Filters sections
+// Filters element sections
 .filters {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 25px 0;
-}
-.filter {
   &__wrapper {
     display: flex;
     margin-left: 25px;
-    max-height: 51px;
+    max-height: 50px;
   }
   &--number {
     color: $primary;
@@ -17,88 +15,97 @@
     margin: 10px 25px 10px 0;
   }
 }
+
+// Dropdown tags sections
 .dropdown {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
   margin: 0 10px;
   &--btn {
     cursor: pointer;
-    width: 100%;
-    border: none;
     color: $primary;
+    border: none;
+    border-radius: 10px;
     font-size: 18px;
     padding: 15px;
-    border-radius: 10px;
-    &--item {
-      cursor: pointer;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-    }
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
   }
-  &__tag {
+  &--items {
+    display: none;
     position: relative;
     z-index: 1;
-    &--btn {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 230px;
-      border: none;
-      color: #1B1B1B;
-      background-color: white;
-      font-size: 18px;
-      padding: 15px;
-      border-radius: 10px 10px 0 0;
-      &__list {
-        background-color: white;
-        max-height: 300px;
-        overflow: auto;
-        border-radius: 0 0 10px 10px;
-        position: relative;
-        top: -4px;
-        max-width: 230px;
-        text-align: left;
-        font-size: 14px;
-        list-style: none;
-        padding: 0;
-        margin: 0;
-      }
-    }
-    &__div {
-      display: flex;
-      align-items: center;
-      background-color: white;
-      position: relative;
-      top: -2px;
-      max-width: 230px;
-      &--label {
-        display: block;
-        visibility: hidden;
-        width: 15px;
-      }
-      &--input {
-        background: none;
-        width: 100%;
-        border: 1px solid $primary;
-        border-radius: 5px;
-        margin: 10px;
-        padding: 10px;
-      }
-      &--research {
-        cursor: pointer;
-        border: none;
-        background-color: transparent;
-        width: 15px;
-        height: 15px;
-        margin-right: 10px;
-        padding: 0;
-      }
-    }
   }
 }
 
-// Tags sections
+// Search items
+.search-tag {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  position: relative;
+  max-width: 230px;
+  &--input {
+    background: none;
+    width: 100%;
+    border: 1px solid $primary;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+  }
+  &--delete {
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    display: none;
+    position: absolute;
+    right: 30px;
+    padding: 0;
+    height: 15px;
+    width: 15px;
+  }
+  &--research {
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    right: 15px;
+    padding: 0;
+    height: 15px;
+    width: 15px;
+  }
+}
+// Lists items
+.list {
+  background-color: white;
+  max-height: 300px;
+  overflow: auto;
+  border-radius: 0 0 10px 10px;
+  position: relative;
+  max-width: 230px;
+  text-align: left;
+  font-size: 14px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  &--item {
+    cursor: pointer;
+    margin: 1px;
+    padding: 10px 15px;
+    transition: 0.5s;
+  }
+  &--item:hover {
+    background-color: $important;
+    color: $primary;
+    font-size: large;
+    font-weight: bold;
+    transition: 0.5s;
+  }
+}
+
+// Tags container sections
 .tags {
   gap: 20px;
   flex-wrap: wrap;
@@ -118,22 +125,21 @@
   }
 }
 
-.filter-list {
-  &--item {
-    cursor: pointer;
-    margin: 1px;
-    padding: 10px 15px;
-    transition: 0.5s;
-  }
-  &--item:hover {
-    background-color: $important;
-    color: $primary;
-    font-size: large;
-    font-weight: bold;
-    transition: 0.5s;
-  }
-}
-
-.fa-chevron-down, .fa-chevron-up {
+// Chevron btn
+.fa-chevron-down {
   margin-left: 30px;
 }
+
+// Toggle dropdown
+.active-btn {
+  border-end-start-radius: 0;
+  border-end-end-radius: 0;
+} // Open dropdown
+.active-tag {
+  max-height: 250px;
+  display: flex !important;
+  flex-direction: column;
+} // Open list
+.rotate{
+  transform: rotate(180deg);
+} // Rotate chevron

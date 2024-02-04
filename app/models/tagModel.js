@@ -3,35 +3,29 @@ import { TagView } from '../views/tagView.js';
 export class TagModel {
   constructor(tags) {
     this.tags = tags
-    this.count = tags.length
+    this.uniqueProperties = {
+      ingredients: new Set(),
+      appliances: new Set(),
+      ustensils: new Set()
+    };
   }
 
-  _getUniqueListByProperty(recipes, items) {
-    const uniqueSet = new Set();
-
-    recipes.forEach((recipe) => {
-      if (recipe[items]) {
-        const itemsValue = recipe[items];
-
-        if (Array.isArray(itemsValue)) {
-          itemsValue.forEach((item) => {
-            typeof(item === 'object') && item.ingredient ? uniqueSet.add(item.ingredient) : uniqueSet.add(item);
-          }); // Ingredients / Ustensils
-        } else {
-          uniqueSet.add(itemsValue); // Applicance
-        }
-      }
+  _addPropertyToSet(propertySet, value) {
+    return propertySet.add(value.toLowerCase());
+  }
+  render() {
+    this.tags.forEach(recipe => {
+      recipe.ingredients.forEach((ingredient) => this._addPropertyToSet(this.uniqueProperties.ingredients, ingredient.ingredient));
+      this._addPropertyToSet(this.uniqueProperties.appliances, recipe.appliance);
+      recipe.ustensils.forEach((ustensil) => this._addPropertyToSet(this.uniqueProperties.ustensils, ustensil));
     });
 
-    return Array.from(uniqueSet);
-  }
+    // Convert sets to arrays and sort alphabetically
+    const propertiesArray = {};
+    for (const property in this.uniqueProperties) {
+      propertiesArray[property] = Array.from(this.uniqueProperties[property]).sort();
+    }
 
-  render() {
-    const uniqueIngredients = this._getUniqueListByProperty(this.tags, 'ingredients');
-    const uniqueAppliances = this._getUniqueListByProperty(this.tags, 'appliance');
-    const uniqueUstensils = this._getUniqueListByProperty(this.tags, 'ustensils');
-
-    const tagView = new TagView();
-    tagView.displaySearchTag(uniqueIngredients, uniqueAppliances, uniqueUstensils, this.count);
+    return new TagView().displaySearchTag(propertiesArray, this.tags.length);
   }
 }

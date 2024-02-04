@@ -1,152 +1,148 @@
-import { SetAtt } from '../utils/domUtil.js';
+import { NormalizeString, LowerCase, SetAtt, UpperFirstCase } from '../utils/domUtil.js';
 
 export class TagView {
   constructor() {
     // DOM Elements
     this.tagsFilter = document.querySelector('.filters');
     this.tagsContainer = document.querySelector('.tags');
-    this.itemList = null;
+    this.currentInput = null;
   }
 
-  // GET METHODS
-  _getSearchTagsBtn(label) {
+  // GENERAL METHODS
+  _toggleDropdown(btn, isOpen) {
+    const rotateClass = isOpen ? 'rotate' : '';
+    btn.querySelector('.fa-chevron-down').classList.toggle('rotate', rotateClass);
+    btn.classList.toggle('active-btn', isOpen);
+    btn.nextElementSibling.classList.toggle('active-tag', isOpen);
+  }
+  _closeAllDropdowns(dropdownBtns) {
+    dropdownBtns.forEach((btn) => this._toggleDropdown(btn, false));
+  }
+
+  // DEFINE METHODS
+  _defineSearchTag(label, tags) {
+    // Constante
     const searchTags = document.createElement('div');
-    searchTags.classList.add('dropdown__tag__div');
-    const labelName = label.toLowerCase();
-
-    // Item input
     const inputItem = document.createElement('input');
-    SetAtt(inputItem, 'id', `${labelName}`)
-    SetAtt(inputItem, 'type', 'text');
-    SetAtt(inputItem, 'tabindex', 0);
-    SetAtt(inputItem, 'placeholder', `recherchez un ${labelName}...`);
-    inputItem.classList.add('dropdown__tag__div--input');
-
-    // Item btnIcon
-    const btnIconItem = document.createElement('button');
-    SetAtt(btnIconItem, 'tabindex', 0);
-    btnIconItem.classList.add('dropdown__tag__div--research');
-
-    // Item icon
+    const btnDelItem = document.createElement('button');
+    const btnSearchItem = document.createElement('button');
+    const iconDel = document.createElement('i');
     const iconSearch = document.createElement('i');
-    iconSearch.classList.add('fa-solid');
-    iconSearch.classList.add('fa-magnifying-glass');
+    const labelName = LowerCase(label);
 
-    btnIconItem.appendChild(iconSearch);
-    searchTags.append(inputItem, btnIconItem)
+    // ClassList
+    searchTags.classList.add('search-tag');
+    inputItem.classList.add('search-tag--input');
+    btnDelItem.classList.add('search-tag--delete');
+    btnSearchItem.classList.add('search-tag--research');
+    iconDel.classList.add('fa-solid', 'fa-xmark');
+    iconSearch.classList.add('fa-solid', 'fa-magnifying-glass');
+
+    // Set attribute
+    SetAtt(inputItem, 'id', `${NormalizeString(labelName)}`)
+    SetAtt(inputItem, 'type', 'text');
+    SetAtt(inputItem, 'tabindex', '0');
+    SetAtt(btnDelItem, 'tabindex', '0');
+    SetAtt(btnSearchItem, 'tabindex', '0');
+
+    // Add event listener
+    inputItem.addEventListener('input', () => {
+      this.currentInput = LowerCase(label);
+      const filteredTags = tags.filter((tag) => LowerCase(tag).includes(LowerCase(inputItem.value)));
+      const tagList = document.querySelector(`.${NormalizeString(this.currentInput)}-list`);
+      tagList.innerHTML = '';
+
+      filteredTags.forEach((tag) => {
+        const tagItem = document.createElement('li');
+        tagItem.classList.add('list--item');
+        tagItem.textContent = UpperFirstCase(tag);
+        SetAtt(tagItem, 'tabindex', '0');
+        tagItem.addEventListener('click', (event) => {
+          event.preventDefault();
+          event.target.style.display = 'none';
+        });
+        tagList.appendChild(tagItem);
+      });
+    });
+
+    btnDelItem.appendChild(iconDel);
+    btnSearchItem.appendChild(iconSearch);
+    searchTags.append(inputItem, btnDelItem, btnSearchItem);
     return searchTags;
   }
-  _getSearchTagsList(tags) {
+  _defineTagsList(label, tags) {
     const unorderedList = document.createElement('ul');
-    unorderedList.classList.add('dropdown__tag--btn__list');
+    unorderedList.classList.add('list', `${NormalizeString(label)}-list`);
 
     tags.forEach((tag) => {
       const tagList = document.createElement('li');
-      tagList.textContent = tag.charAt(0).toUpperCase() + tag.slice(1); // toUpperCase()
-      tagList.classList.add('filter-list--item');
-      SetAtt(tagList, 'tabindex', 0);
+      tagList.classList.add('list--item');
+      tagList.textContent = UpperFirstCase(tag);
+      SetAtt(tagList, 'tabindex', '0');
+      tagList.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.target.style.display = 'none';
+      });
       unorderedList.appendChild(tagList);
     });
     return unorderedList;
   }
-  _getRecipeNumber(count) {
+  _defineRecipeNumber(count) {
     const recipeNumber = document.createElement('h2')
     recipeNumber.classList.add('filters--number')
     recipeNumber.textContent = `${count} recettes`;
-    return recipeNumber
+    return recipeNumber;
   }
 
   // SET METHODS
-  _toggleDropdown(label) {
-    let btnId = '';
-    let listId = '';
-
-    if (label === 'Ingrédient') {
-      btnId = document.getElementById('ingredient-btn');
-      listId = document.getElementById('ingredient-list');
-    } else if (label === 'Appareil') {
-      btnId = document.getElementById('appliance-btn');
-      listId = document.getElementById('appliance-list');
-    } else if (label === 'Ustensile') {
-      btnId = document.getElementById('ustensil-btn');
-      listId = document.getElementById('ustensil-list');
-    }
-
-    if (btnId.style.display === 'block') {
-      btnId.style.display = 'none';
-      listId.style.display = 'block';
-    } else if (listId.style.display === 'block') {
-      btnId.style.display = 'block';
-      listId.style.display = 'none';
-    }
-  }
-  _setListTags(label, tags) {
+  _setSearchTag(label, tags) {
     const dropdownTag = document.createElement('div');
-    dropdownTag.classList.add('dropdown__tag');
-    dropdownTag.style.display = 'none';
+    const searchTags = this._defineSearchTag(label, tags); // Item input + btnIcon
+    const tagsList = this._defineTagsList(label, tags); // Tags lists
 
-    // Item btn + icon
-    const button = document.createElement('button');
-    button.classList.add(`dropdown__tag--btn`);
-    button.addEventListener('click', () => this._toggleDropdown(label));
-
-    const span = document.createElement('span');
-    span.classList.add('dropdown--btn--item');
-    span.textContent = `${label}s`;
-
-    const icon = document.createElement('i');
-    icon.classList.add('fa-solid');
-    icon.classList.add('fa-chevron-up');
-
-    span.appendChild(icon);
-    button.appendChild(span);
-
-    const searchTagsBtn = this._getSearchTagsBtn(label); // Item label + input + btnIcon
-    const searchTagsList = this._getSearchTagsList(tags); // Item tags list
-
-    dropdownTag.append(button, searchTagsBtn, searchTagsList);
+    dropdownTag.classList.add('dropdown--items');
+    dropdownTag.append(searchTags, tagsList);
     return dropdownTag;
   }
   _setDropdown(label, tags) {
+    // Create element
     const dropdown = document.createElement('div');
+    const dropdownBtn = document.createElement('button');
+    const dropdownSpan = document.createElement('span');
+    const dropdownIcon = document.createElement('i');
+
+    // Add classList
     dropdown.classList.add('dropdown');
+    dropdownBtn.classList.add('dropdown--btn');
+    dropdownIcon.classList.add('fa-solid', 'fa-chevron-down');
 
-    const button = document.createElement('button');
-    button.classList.add('dropdown--btn');
-    button.addEventListener('click', () => this._toggleDropdown(label));
-    button.style.display = 'block';
+    // Add event listener
+    dropdownBtn.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const isDropdownOpen = dropdownBtn.classList.contains('active-btn');
+      this._closeAllDropdowns(document.querySelectorAll('.dropdown--btn'));
+      this._toggleDropdown(dropdownBtn, !isDropdownOpen);
+    });
 
-    const span = document.createElement('span');
-    span.classList.add('dropdown--btn--item');
-    span.textContent = `${label}s`;
+    // Add text content
+    dropdownSpan.textContent = `${label}s`;
 
-    const icon = document.createElement('i');
-    icon.classList.add('fa-solid');
-    icon.classList.add('fa-chevron-down');
-
-    span.appendChild(icon);
-    button.appendChild(span);
-
-    const searchTag = this._setListTags(label, tags);
-
-    dropdown.append(button, searchTag);
+    dropdownBtn.append(dropdownSpan, dropdownIcon);
+    dropdown.append(dropdownBtn, this._setSearchTag(label, tags));
     return dropdown;
   }
 
-  displaySearchTag(ingredients, appliance, ustensils, count) {
+  displaySearchTag(tags, count) {
     // Container dropdown tags filter
     const tagsFilterContainer = document.createElement('div');
-    tagsFilterContainer.classList.add('filter__wrapper');
+    tagsFilterContainer.classList.add('filters__wrapper');
 
-    // Dropdown tags filter
-    const ingredientItems = this._setDropdown('Ingrédient', ingredients);
-    const applianceItems = this._setDropdown('Appareil', appliance);
-    const ustensilItems = this._setDropdown('Ustensile', ustensils);
+    // Call methods
+    const ingredientItems = this._setDropdown('Ingrédient', tags.ingredients);
+    const applianceItems = this._setDropdown('Appareil', tags.appliances);
+    const ustensilItems = this._setDropdown('Ustensile', tags.ustensils);
+    const recipeNumber = this._defineRecipeNumber(count);
 
-    // Recipe Number
-    const recipeNumber = this._getRecipeNumber(count);
-
-    // Append methods
     tagsFilterContainer.append(ingredientItems, applianceItems, ustensilItems);
     this.tagsFilter.append(tagsFilterContainer, recipeNumber);
     return this.tagsFilter;
