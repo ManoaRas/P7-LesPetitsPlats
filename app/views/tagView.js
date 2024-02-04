@@ -4,10 +4,12 @@ import { NormalizeString, LowerCase, SetAtt, UpperFirstCase } from '../utils/dom
 export class TagView {
   constructor(recipes) {
     // DOM Elements
+    this.cards = document.querySelector('.cards');
     this.tagsFilter = document.querySelector('.filters');
     this.tagsContainer = document.querySelector('.tags');
     this.currentInput = null;
     this.selectedTags = [];
+    this.recipeTags = [];
     this.recipes = recipes;
   }
 
@@ -21,6 +23,18 @@ export class TagView {
   _closeAllDropdowns(dropdownBtns) {
     dropdownBtns.forEach((btn) => this._toggleDropdown(btn, false));
   }
+  _filterListItems() {
+    const listItems = document.querySelectorAll('.list--item');
+    let uniqueIngredients = Array.from(new Set(this.recipeTags));
+
+    listItems.forEach((listItem) => {
+      if (uniqueIngredients.includes(listItem.textContent)) {
+        listItem.style.display = 'block'; // Show matching items
+      } else {
+        listItem.style.display = 'none'; // Hide items that don't match
+      }
+    });
+  }
 
   // CREATE METHODS
   _createList(tags, unorderedList) {
@@ -31,7 +45,7 @@ export class TagView {
       list.textContent = UpperFirstCase(tag);
       list.addEventListener('click', (event) => {
         event.preventDefault();
-        event.target.style.display = 'none';
+        event.target.style.display === 'none';
         this.selectedTags.push(event.target.textContent)
         this._createTagContainer();
         this._updateRecipes();
@@ -42,7 +56,8 @@ export class TagView {
   _createTagContainer() {
     // Vide le container avant de le recréer
     this.tagsContainer.innerHTML = '';
-    this.selectedTags.forEach((tag) => {
+    const uniqueSelectedTags = Array.from(new Set(this.selectedTags));
+    uniqueSelectedTags.forEach((tag) => {
       const tagBtn = document.createElement('button');
       const tagIcon = document.createElement('i');
 
@@ -52,8 +67,7 @@ export class TagView {
       tagBtn.textContent = UpperFirstCase(tag);
 
       tagBtn.addEventListener('click', () => {
-        const selectedTags = tag;
-        this.selectedTags = this.selectedTags.filter((el) => el !== selectedTags);
+        this.selectedTags = this.selectedTags.filter((el) => el !== tag);
         this._updateRecipes();
         this._removeTag(tag);
       });
@@ -62,32 +76,49 @@ export class TagView {
       this.tagsContainer.appendChild(tagBtn);
     });
   }
+
+  // UPDATE METHODS
   _updateRecipes() {
+    // Initialiser recipeTags à une liste vide
+    this.recipeTags = [];
+
     // récupérer les tags sélectionnés
     const selectedTags = this.selectedTags;
 
     // filtrer les recettes en fonction des tags sélectionnés
     const filteredRecipes = this.recipes.filter((recipe) => {
-      const recipeTags = [recipe.appliance, ...recipe.ingredients.map(ingredient => ingredient.ingredient), ...recipe.ustensils];
-      return selectedTags.every(tag => recipeTags.includes(tag));
+      const ingredients = recipe.ingredients.map((ingredient) => ingredient.ingredient);
+      const recipeTags = [...ingredients, recipe.appliance, ...recipe.ustensils];
+      return selectedTags.every((tag) => recipeTags.includes(tag));
     });
+
 
     // effacer les recettes affichées actuellement
     const cards = document.querySelector('.cards');
     cards.innerHTML = '';
 
+    const numberText = document.querySelector('.filters--number')
     // afficher les recettes filtrées
-    filteredRecipes.forEach(recipe => {
-      const card = new RecipeModel(recipe);
-      card.render();
-    });
+    if (!filteredRecipes.length) {
+      this.cards.innerHTML = "<p>Aucune recette n'a été trouvée.</p>";
+    } else {
+      filteredRecipes.forEach((recipe) => {
+        const card = new RecipeModel(recipe);
+        card.render();
+        this.recipeTags.push(...recipe.ingredients.map((ingredient) => ingredient.ingredient));
+        this.recipeTags.push(recipe.appliance);
+        this.recipeTags.push(...recipe.ustensils);
+      });
+    }
+    numberText.textContent = `${filteredRecipes.length} recettes`;
+    this._filterListItems();
   }
+
+  // DELETE METHODS
   _removeTag(tagNameToRemove) {
     this.selectedTags = this.selectedTags.filter((tag) => tag !== tagNameToRemove);
     this._createTagContainer();
-    document.querySelectorAll('.list--item').forEach((list) => {
-      if (list.textContent === UpperFirstCase(tagNameToRemove)) list.style.display = 'block';
-    });
+    this._filterListItems();
   }
 
   // DEFINE METHODS
@@ -118,7 +149,7 @@ export class TagView {
 
     // Add event listener
     inputItem.addEventListener('input', () => {
-      this.currentInput = LowerCase(label);
+      this.currentInput = labelName;
       const filteredTags = tags.filter((tag) => LowerCase(tag).includes(LowerCase(inputItem.value)));
       const unorderedList = document.querySelector(`.${NormalizeString(this.currentInput)}-list`);
       unorderedList.innerHTML = '';
