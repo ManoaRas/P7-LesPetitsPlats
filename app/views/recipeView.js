@@ -1,4 +1,4 @@
-import { SetAtt } from '../utils/domUtil.js';
+import { SetAtt } from '../utils/DOMUtil.js';
 
 export class RecipeView {
   constructor() {
@@ -7,7 +7,7 @@ export class RecipeView {
 
   _getImage(image, name) {
     const img = document.createElement('img');
-    SetAtt(img, "src", `assets/images/cards/${image}`);
+    SetAtt(img, "src", `../../assets/images/cards/${image}`);
     SetAtt(img, "alt", name);
     img.classList.add('card--image');
     return img;

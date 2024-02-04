@@ -1,5 +1,6 @@
 import { RecipeModel } from '../models/recipeModel.js';
-import { NormalizeString, LowerCase, SetAtt, UpperFirstCase } from '../utils/domUtil.js';
+import { NormalizeString, LowerCase, SetAtt, UpperFirstCase } from '../utils/DOMUtil.js';
+
 
 export class TagView {
   constructor(recipes) {

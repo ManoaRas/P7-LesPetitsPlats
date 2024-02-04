@@ -1,4 +1,4 @@
-import { SetAtt } from '../utils/domUtil.js';
+import { SetAtt } from '../utils/DOMUtil.js';
 
 export class SearchBarView {
   constructor() {
