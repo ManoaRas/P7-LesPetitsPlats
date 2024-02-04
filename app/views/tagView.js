@@ -1,12 +1,14 @@
+import { RecipeModel } from '../models/recipeModel.js';
 import { NormalizeString, LowerCase, SetAtt, UpperFirstCase } from '../utils/domUtil.js';
 
 export class TagView {
-  constructor() {
+  constructor(recipes) {
     // DOM Elements
     this.tagsFilter = document.querySelector('.filters');
     this.tagsContainer = document.querySelector('.tags');
     this.currentInput = null;
     this.selectedTags = [];
+    this.recipes = recipes;
   }
 
   // GENERAL METHODS
@@ -32,6 +34,7 @@ export class TagView {
         event.target.style.display = 'none';
         this.selectedTags.push(event.target.textContent)
         this._createTagContainer();
+        this._updateRecipes();
       });
       unorderedList.appendChild(list);
     });
@@ -48,10 +51,35 @@ export class TagView {
 
       tagBtn.textContent = UpperFirstCase(tag);
 
-      tagBtn.addEventListener('click', () => this._removeTag(tag));
+      tagBtn.addEventListener('click', () => {
+        const selectedTags = tag;
+        this.selectedTags = this.selectedTags.filter((el) => el !== selectedTags);
+        this._updateRecipes();
+        this._removeTag(tag);
+      });
 
       tagBtn.append(tagIcon);
       this.tagsContainer.appendChild(tagBtn);
+    });
+  }
+  _updateRecipes() {
+    // récupérer les tags sélectionnés
+    const selectedTags = this.selectedTags;
+
+    // filtrer les recettes en fonction des tags sélectionnés
+    const filteredRecipes = this.recipes.filter((recipe) => {
+      const recipeTags = [recipe.appliance, ...recipe.ingredients.map(ingredient => ingredient.ingredient), ...recipe.ustensils];
+      return selectedTags.every(tag => recipeTags.includes(tag));
+    });
+
+    // effacer les recettes affichées actuellement
+    const cards = document.querySelector('.cards');
+    cards.innerHTML = '';
+
+    // afficher les recettes filtrées
+    filteredRecipes.forEach(recipe => {
+      const card = new RecipeModel(recipe);
+      card.render();
     });
   }
   _removeTag(tagNameToRemove) {
