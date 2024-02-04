@@ -39,18 +39,30 @@ export class TagView {
 
   // CREATE METHODS
   _createList(tags, unorderedList) {
+    const handleSelection = (list) => {
+      list.style.display = 'none';
+      this.selectedTags.push(list.textContent)
+      this._createTagContainer();
+      this._updateRecipes();
+    };
+
     tags.forEach((tag) => {
       const list = document.createElement('li');
       list.classList.add('list--item');
       SetAtt(list, 'tabindex', '0');
       list.textContent = UpperFirstCase(tag);
+
       list.addEventListener('click', (event) => {
         event.preventDefault();
-        event.target.style.display === 'none';
-        this.selectedTags.push(event.target.textContent)
-        this._createTagContainer();
-        this._updateRecipes();
+        handleSelection(list);
       });
+      list.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          handleSelection(list);
+        }
+      });
+
       unorderedList.appendChild(list);
     });
   }
@@ -127,26 +139,16 @@ export class TagView {
     // Constante
     const searchTags = document.createElement('div');
     const inputItem = document.createElement('input');
-    const btnDelItem = document.createElement('button');
-    const btnSearchItem = document.createElement('button');
-    const iconDel = document.createElement('i');
-    const iconSearch = document.createElement('i');
     const labelName = LowerCase(label);
 
     // ClassList
     searchTags.classList.add('search-tag');
     inputItem.classList.add('search-tag--input');
-    btnDelItem.classList.add('search-tag--delete');
-    btnSearchItem.classList.add('search-tag--research');
-    iconDel.classList.add('fa-solid', 'fa-xmark');
-    iconSearch.classList.add('fa-solid', 'fa-magnifying-glass');
 
     // Set attribute
     SetAtt(inputItem, 'id', `${NormalizeString(labelName)}`)
-    SetAtt(inputItem, 'type', 'text');
+    SetAtt(inputItem, 'type', 'search');
     SetAtt(inputItem, 'tabindex', '0');
-    SetAtt(btnDelItem, 'tabindex', '0');
-    SetAtt(btnSearchItem, 'tabindex', '0');
 
     // Add event listener
     inputItem.addEventListener('input', () => {
@@ -157,9 +159,7 @@ export class TagView {
       this._createList(filteredTags, unorderedList);
     });
 
-    btnDelItem.appendChild(iconDel);
-    btnSearchItem.appendChild(iconSearch);
-    searchTags.append(inputItem, btnDelItem, btnSearchItem);
+    searchTags.append(inputItem);
     return searchTags;
   }
   _defineTagsList(label, tags) {

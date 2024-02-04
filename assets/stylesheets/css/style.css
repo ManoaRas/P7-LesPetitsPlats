@@ -61,7 +61,7 @@
   color: #7A7A7A;
 }
 
-.search {
+.headers {
   background-image: url("../../../../assets/images/les-petits-plats.png");
   background-repeat: no-repeat;
   background-size: cover;
@@ -70,16 +70,16 @@
   flex-direction: column;
   justify-content: space-between;
 }
-.search--logo {
-  max-width: 200px;
+.headers--logo {
+  max-width: 330px;
   padding: 30px;
 }
-.search__header {
+.headers__container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.search__header--title {
+.headers__container--title {
   color: #FFD15B;
   font-size: 44px;
   text-align: center;
@@ -87,18 +87,18 @@
   width: 890px;
   padding: 30px;
 }
-.search__header__bar {
+.headers__container__bar {
   display: flex;
   border-radius: 10px;
   width: 80%;
 }
-.search__header__bar--label {
+.headers__container__bar--label {
   display: block;
   visibility: hidden;
   height: 50px;
   width: 50px;
 }
-.search__header__bar--input {
+.headers__container__bar--input {
   height: 50px;
   width: 100%;
   border: none;
@@ -107,7 +107,7 @@
   font-size: 1rem;
   color: #7A7A7A;
 }
-.search__header__bar--research {
+.headers__container__bar--research {
   cursor: pointer;
   position: relative;
   top: 6px;
@@ -147,7 +147,7 @@
   cursor: pointer;
   color: #1B1B1B;
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
   font-size: 18px;
   padding: 15px;
   width: 100%;
@@ -175,33 +175,12 @@
   margin: 10px;
   padding: 10px;
 }
-.search-tag--delete {
-  cursor: pointer;
-  background-color: transparent;
-  border: none;
-  display: none;
-  position: absolute;
-  right: 30px;
-  padding: 0;
-  height: 15px;
-  width: 15px;
-}
-.search-tag--research {
-  cursor: pointer;
-  background-color: transparent;
-  border: none;
-  position: absolute;
-  right: 15px;
-  padding: 0;
-  height: 15px;
-  width: 15px;
-}
 
 .list {
   background-color: white;
   max-height: 300px;
   overflow: auto;
-  border-radius: 0 0 10px 10px;
+  border-radius: 0 0 5px 5px;
   position: relative;
   max-width: 230px;
   text-align: left;
@@ -235,7 +214,7 @@
   display: flex;
   align-items: center;
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
   background-color: #FFD15B;
   color: #1B1B1B;
   padding: 15px;

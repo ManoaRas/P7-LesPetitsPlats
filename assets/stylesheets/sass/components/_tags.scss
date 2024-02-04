@@ -26,7 +26,7 @@
     cursor: pointer;
     color: $primary;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     font-size: 18px;
     padding: 15px;
     width: 100%;
@@ -55,34 +55,13 @@
     margin: 10px;
     padding: 10px;
   }
-  &--delete {
-    cursor: pointer;
-    background-color: transparent;
-    border: none;
-    display: none;
-    position: absolute;
-    right: 30px;
-    padding: 0;
-    height: 15px;
-    width: 15px;
-  }
-  &--research {
-    cursor: pointer;
-    background-color: transparent;
-    border: none;
-    position: absolute;
-    right: 15px;
-    padding: 0;
-    height: 15px;
-    width: 15px;
-  }
 }
 // Lists items
 .list {
   background-color: white;
   max-height: 300px;
   overflow: auto;
-  border-radius: 0 0 10px 10px;
+  border-radius: 0 0 5px 5px;
   position: relative;
   max-width: 230px;
   text-align: left;
@@ -116,7 +95,7 @@
     display: flex;
     align-items: center;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     background-color: $important;
     color: $primary;
     padding: 15px;
