@@ -62,7 +62,7 @@ export class SearchBarView {
     btnDeleteIcon.classList.add('fa-solid', 'fa-xmark');
 
     SetAtt(btnDelete, 'type', 'reset');
-    SetAtt(btnDelete, 'aria-label', 'Searchbar button delete');
+    SetAtt(btnDelete, 'aria-label', 'Searchbar delete button');
 
     btnDelete.style.visibility = inputElement.value.length > 0 ? 'visible' : 'hidden';
     inputElement.addEventListener('input', () => {
@@ -85,7 +85,7 @@ export class SearchBarView {
     iconSearch.classList.add('fa-solid', 'fa-magnifying-glass');
 
     SetAtt(btnSearch, 'type', 'submit');
-    SetAtt(btnSearch, 'aria-label', 'Searchbar button research');
+    SetAtt(btnSearch, 'aria-label', 'Searchbar research button');
 
     btnSearch.appendChild(iconSearch);
     return btnSearch;

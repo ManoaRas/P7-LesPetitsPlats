@@ -143,7 +143,7 @@ export class TagView {
     btnDeleteIcon.classList.add('fa-solid', 'fa-xmark');
 
     SetAtt(btnDelete, 'type', 'reset');
-    SetAtt(btnDelete, 'aria-label', 'Searchbar button delete');
+    SetAtt(btnDelete, 'aria-label', 'Tag delete button');
 
     btnDelete.style.visibility = inputElement.value.length > 0 ? 'visible' : 'hidden';
     inputElement.addEventListener('input', () => {
@@ -161,6 +161,19 @@ export class TagView {
 
     btnDelete.append(btnDeleteIcon);
     return btnDelete;
+  }
+  _defineBtnSearch() {
+    const btnSearch = document.createElement('button');
+    const iconSearch = document.createElement('i');
+
+    btnSearch.classList.add('search-tag--research');
+    iconSearch.classList.add('fa-solid', 'fa-magnifying-glass');
+
+    SetAtt(btnSearch, 'type', 'submit');
+    SetAtt(btnSearch, 'aria-label', 'Tag research button');
+
+    btnSearch.appendChild(iconSearch);
+    return btnSearch;
   }
   _defineSearchTag(label, tags) {
     // Constante
@@ -187,8 +200,8 @@ export class TagView {
     });
 
     const deleteBtn = this._defineBtnDelete(inputItem, tags);
-
-    searchTags.append(inputItem, deleteBtn);
+    const searchBtn = this._defineBtnSearch();
+    searchTags.append(inputItem, deleteBtn, searchBtn);
     return searchTags;
   }
   _defineTagsList(label, tags) {

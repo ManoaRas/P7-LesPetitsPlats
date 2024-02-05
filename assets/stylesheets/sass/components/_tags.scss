@@ -61,10 +61,19 @@
     background-color: transparent;
     border: none;
     font-size: 14px;
+    height: 25px;
+    width: 25px;
     position: absolute;
-    right: 1.2em;
-    width: 40px;
-    height: 40px;
+    right: 2em;
+  }
+  &--research {
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    height: 25px;
+    width: 25px;
+    position: absolute;
+    right: 1em;
   }
 }
 // Lists items
@@ -88,6 +97,7 @@
   }
   &--item:hover {
     background-color: $important;
+    border-radius: 5px;
     color: $primary;
     font-size: large;
     font-weight: bold;

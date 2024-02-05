@@ -1533,7 +1533,7 @@ export const recipes = [
         }
     ],
     "time": 50,
-    "description":"Préchauffez le fours à 200°. Étaler la pate. La mettre dans un moule. Battre les oeufs avec le sucre. Ajouter le jus de citron et le beurre. Verser le tout sur la pate. Au four 30 minutes. Bon appetit ",
+    "description":"Préchauffez le fours à 200°. Étaler la pate. La mettre dans un moule. Battre les oeufs avec le sucre. Ajouter le jus de citron et le beurre fondu. Verser le tout sur la pate. Au four 30 minutes. Bon appetit ",
     "appliance": "Four",
     "ustensils": ["Rouleau à patisserie", "Moule à tarte", "Presse citron"]
   },
@@ -1559,7 +1559,7 @@ export const recipes = [
             "unit": "grammes"
         },
         {
-            "ingredient": "Beurre",
+            "ingredient": "Beurre fondu",
             "quantity": 50,
             "unit":"grammes"
         },
@@ -1570,7 +1570,7 @@ export const recipes = [
         }
     ],
     "time": 15,
-    "description":"Mélanger la farine et le beurre fondu en ajoutant le lait peu à peu. Ajouter du sucre après la cuisson. Bien mélanger. Ajouter le chocolat en morceaux et laisser chauffer 8 minutes en mélangeant avec une cuillère en bois. Mettre dans des verres",
+    "description": "Mélanger la farine et le beurre fondu en ajoutant le lait peu à peu. Ajouter du sucre après la cuisson. Bien mélanger. Ajouter le chocolat en morceaux et laisser chauffer 8 minutes en mélangeant avec une cuillère en bois. Mettre dans des verres",
     "appliance": "Casserole",
     "ustensils": ["Cuillère en bois"]
   },

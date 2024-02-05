@@ -113,9 +113,10 @@
   cursor: pointer;
   background-color: transparent;
   border: none;
-  font-size: 18px;
   margin: 6px;
-  width: 40px;
+  padding: 0;
+  font-size: 18px;
+  width: 20px;
   height: 40px;
   position: absolute;
   right: 9em;
@@ -127,6 +128,7 @@
   border-radius: 10px;
   border: none;
   margin: 6px;
+  padding: 0;
   height: 40px;
   width: 40px;
   position: absolute;
@@ -194,10 +196,19 @@
   background-color: transparent;
   border: none;
   font-size: 14px;
+  height: 25px;
+  width: 25px;
   position: absolute;
-  right: 1.2em;
-  width: 40px;
-  height: 40px;
+  right: 2em;
+}
+.search-tag--research {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  height: 25px;
+  width: 25px;
+  position: absolute;
+  right: 1em;
 }
 
 .list {
@@ -221,6 +232,7 @@
 }
 .list--item:hover {
   background-color: #FFD15B;
+  border-radius: 5px;
   color: #1B1B1B;
   font-size: large;
   font-weight: bold;
