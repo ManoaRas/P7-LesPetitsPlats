@@ -7,8 +7,13 @@ export class SearchBarModel {
   // Les tags sont actualisées avec les informations des 3 types de tags des recettes affichées
   // Reprendre le filtrage dans le input des tags
   // Permettre la sélection dans la recherche
+
+  constructor(recipe) {
+    this.recipe = recipe;
+    console.log(recipe);
+  }
+
   render() {
-    const searchBarView = new SearchBarView();
-    searchBarView.displaySearchBar();
+    new SearchBarView().displaySearchBar();
   }
 }

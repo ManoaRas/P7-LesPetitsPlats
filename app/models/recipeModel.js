@@ -15,7 +15,6 @@ export class RecipeModel {
   }
 
   render() {
-    const recipeView = new RecipeView();
-    recipeView.displayRecipe(this.id, this.image, this.name, this.time, this.description, this.ingredients);
+    new RecipeView().displayRecipe(this.id, this.image, this.name, this.time, this.description, this.ingredients);
   }
 }

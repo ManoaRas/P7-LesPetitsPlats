@@ -6,7 +6,7 @@ import { TagModel } from '../models/tagModel.js';
 class IndexPage {
   async init() {
     // Display search bar and search tag
-    new SearchBarModel().render();
+    new SearchBarModel(recipes).render();
     new TagModel(recipes).render();
 
     // Display all recipes
