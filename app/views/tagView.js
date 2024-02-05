@@ -105,7 +105,6 @@ export class TagView {
       return selectedTags.every((tag) => recipeTags.includes(tag));
     });
 
-
     // effacer les recettes affichées actuellement
     const cards = document.querySelector('.cards');
     cards.innerHTML = '';
@@ -157,6 +156,7 @@ export class TagView {
       const unorderedList = document.querySelector(`.${NormalizeString(labelName)}-list`);
       unorderedList.innerHTML = '';
       this._createList(filteredTags, unorderedList);
+      this._filterListItems();
     });
 
     btnDelete.append(btnDeleteIcon);
@@ -197,6 +197,7 @@ export class TagView {
       const unorderedList = document.querySelector(`.${NormalizeString(this.currentInput)}-list`);
       unorderedList.innerHTML = '';
       this._createList(filteredTags, unorderedList);
+      this._filterListItems();
     });
 
     const deleteBtn = this._defineBtnDelete(inputItem, tags);
