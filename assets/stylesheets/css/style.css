@@ -47,19 +47,20 @@
   color: #1B1B1B;
   font-size: 14px;
 }
-.recipe-infos__list {
+
+.ingredients-list {
   columns: 2;
   padding: 0;
   font-size: 14px;
   list-style: none;
 }
-.recipe-infos__list__item {
+.ingredients-list__item {
   margin-bottom: 20px;
 }
-.recipe-infos__list__item--text {
+.ingredients-list__item--text {
   color: #1B1B1B;
 }
-.recipe-infos__list__item--quantity {
+.ingredients-list__item--quantity {
   color: #595959;
 }
 

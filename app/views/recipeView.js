@@ -45,24 +45,24 @@ export class RecipeView {
     recipeIngredientsTitle.textContent = 'INGRÉDIENTS';
 
     const recipeIngredientsList = document.createElement('ul');
-    recipeIngredientsList.classList.add('recipe-infos__list');
+    recipeIngredientsList.classList.add('ingredients-list');
 
     ingredients.forEach((ingredient) => {
-      const ingredientList = document.createElement('li');
-      ingredientList.classList.add('recipe-infos__list__item');
+      const ingredientsList = document.createElement('li');
+      ingredientsList.classList.add('ingredients-list__item');
 
-      const ingredientListText = document.createElement('span');
-      ingredientListText.classList.add('recipe-infos__list__item--text');
-      const ingredientListQuantity = document.createElement('span');
-      ingredientListQuantity.classList.add('recipe-infos__list__item--quantity');
+      const ingredientsListText = document.createElement('span');
+      ingredientsListText.classList.add('ingredients-list__item--text');
+      const ingredientsListQuantity = document.createElement('span');
+      ingredientsListQuantity.classList.add('ingredients-list__item--quantity');
 
       const breakRow = document.createElement('br');
 
-      ingredientListText.textContent = `${ingredient.ingredient ? `${ingredient.ingredient}` : ' '}`;
-      ingredientListQuantity.textContent = `${ingredient.quantity ? `${ingredient.quantity}` : ' '} ${ingredient.unit ? `${ingredient.unit}` : ' '}`;
+      ingredientsListText.textContent = `${ingredient.ingredient ? `${ingredient.ingredient}` : ' '}`;
+      ingredientsListQuantity.textContent = `${ingredient.quantity ? `${ingredient.quantity}` : ' '} ${ingredient.unit ? `${ingredient.unit}` : ' '}`;
 
-      ingredientList.append(ingredientListText, breakRow, ingredientListQuantity);
-      recipeIngredientsList.appendChild(ingredientList);
+      ingredientsList.append(ingredientsListText, breakRow, ingredientsListQuantity);
+      recipeIngredientsList.appendChild(ingredientsList);
     });
 
     recipeIngredients.append(recipeIngredientsTitle, recipeIngredientsList);

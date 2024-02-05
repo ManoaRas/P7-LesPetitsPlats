@@ -1,10 +1,11 @@
+// Cards container
 .cards {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 50px;
 }
-
+// Cards recipes
 .card {
   position: relative;
   width: 27%;
@@ -29,6 +30,7 @@
     background: $important;
   }
 }
+// Recipes informations + ingredients
 .recipe {
   margin: 0 20px;
   &--name {
@@ -36,6 +38,7 @@
     font-size: 18px;
   }
 }
+// Recipes informations
 .recipe-infos {
   &--title {
     font-size: 12px;
@@ -46,19 +49,20 @@
     color: $primary;
     font-size: 14px;
   }
-  &__list {
-    columns: 2;
-    padding: 0;
-    font-size: 14px;
-    list-style: none;
-    &__item {
-      margin-bottom: 20px;
-      &--text {
-        color: $primary;
-      }
-      &--quantity {
-        color: $secondary-dark;
-      }
+}
+// Recipe ingredients list
+.ingredients-list {
+  columns: 2;
+  padding: 0;
+  font-size: 14px;
+  list-style: none;
+  &__item {
+    margin-bottom: 20px;
+    &--text {
+      color: $primary;
+    }
+    &--quantity {
+      color: $secondary-dark;
     }
   }
 }
