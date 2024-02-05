@@ -20,8 +20,9 @@
 .dropdown {
   display: flex;
   flex-direction: column;
-  width: 200px;
   margin: 0 10px;
+  width: 200px;
+  height: 100%;
   &--btn {
     cursor: pointer;
     color: $primary;

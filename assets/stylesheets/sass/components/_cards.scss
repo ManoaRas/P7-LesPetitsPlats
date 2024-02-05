@@ -11,8 +11,8 @@
   border-radius: 20px;
   overflow: hidden;
   transition: 0.5s;
-  box-shadow: 0 0 14px 7px $secondary-dark;
-  background-color: $secondary-light;
+  box-shadow: 0 0 14px 7px $secondary-light;
+  background-color: $background;
   &--image {
     height: 200px;
     width: 100%;
@@ -28,36 +28,36 @@
     font-size: 12px;
     background: $important;
   }
-  &__recipe {
-    margin: 0 20px;
-    &--name {
-      color: $primary;
-      font-size: 18px;
-    }
-    &__infos {
-      &--title {
-        font-size: 12px;
-        font-weight: 700;
-        color: $secondary-dark;
-      }
-      &--description {
+}
+.recipe {
+  margin: 0 20px;
+  &--name {
+    color: $primary;
+    font-size: 18px;
+  }
+}
+.recipe-infos {
+  &--title {
+    font-size: 12px;
+    font-weight: 700;
+    color: $secondary-dark;
+  }
+  &--description {
+    color: $primary;
+    font-size: 14px;
+  }
+  &__list {
+    columns: 2;
+    padding: 0;
+    font-size: 14px;
+    list-style: none;
+    &__item {
+      margin-bottom: 20px;
+      &--text {
         color: $primary;
-        font-size: 14px;
       }
-      &__list {
-        columns: 2;
-        padding: 0;
-        font-size: 14px;
-        list-style: none;
-        &__item {
-          margin-bottom: 20px;
-          &--text {
-            color: $primary;
-          }
-          &--quantity {
-            color: $secondary-dark;
-          }
-        }
+      &--quantity {
+        color: $secondary-dark;
       }
     }
   }

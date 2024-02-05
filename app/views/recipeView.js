@@ -20,31 +20,16 @@ export class RecipeView {
     return timeDiv;
   }
 
-  _getInfos(name, description, ingredients) {
-    const recipe = document.createElement('div');
-    recipe.classList.add('card__recipe');
-
-    const recipeName = document.createElement('h2');
-    recipeName.classList.add('card__recipe--name');
-    recipeName.textContent = name;
-
-    const recipeDescription = this._getInfosDescription(description);
-    const recipeIngredient = this._getInfosIngredient(ingredients);
-
-    recipe.append(recipeName, recipeDescription, recipeIngredient);
-    return recipe;
-  }
-
-  _getInfosDescription(description) {
+  _getInfosRecipes(description) {
     const recipeDescription = document.createElement('div');
-    recipeDescription.classList.add('card__recipe__infos');
+    recipeDescription.classList.add('recipe-infos');
 
-    const recipeDescriptionTitle = document.createElement('h4');
-    recipeDescriptionTitle.classList.add('card__recipe__infos--title');
+    const recipeDescriptionTitle = document.createElement('h3');
+    recipeDescriptionTitle.classList.add('recipe-infos--title');
     recipeDescriptionTitle.textContent = 'RECETTE';
 
     const recipeDescriptionText = document.createElement('p');
-    recipeDescriptionText.classList.add('card__recipe__infos--description');
+    recipeDescriptionText.classList.add('recipe-infos--description');
     recipeDescriptionText.textContent = description;
 
     recipeDescription.append(recipeDescriptionTitle, recipeDescriptionText);
@@ -53,23 +38,23 @@ export class RecipeView {
 
   _getInfosIngredient(ingredients) {
     const recipeIngredients = document.createElement('div');
-    recipeIngredients.classList.add('card__recipe__infos');
+    recipeIngredients.classList.add('recipe-infos');
 
-    const recipeIngredientsTitle = document.createElement('h4');
-    recipeIngredientsTitle.classList.add('card__recipe__infos--title');
+    const recipeIngredientsTitle = document.createElement('h3');
+    recipeIngredientsTitle.classList.add('recipe-infos--title');
     recipeIngredientsTitle.textContent = 'INGRÉDIENTS';
 
     const recipeIngredientsList = document.createElement('ul');
-    recipeIngredientsList.classList.add('card__recipe__infos__list');
+    recipeIngredientsList.classList.add('recipe-infos__list');
 
     ingredients.forEach((ingredient) => {
       const ingredientList = document.createElement('li');
-      ingredientList.classList.add('card__recipe__infos__list__item');
+      ingredientList.classList.add('recipe-infos__list__item');
 
       const ingredientListText = document.createElement('span');
-      ingredientListText.classList.add('card__recipe__infos__list__item--text');
+      ingredientListText.classList.add('recipe-infos__list__item--text');
       const ingredientListQuantity = document.createElement('span');
-      ingredientListQuantity.classList.add('card__recipe__infos__list__item--quantity');
+      ingredientListQuantity.classList.add('recipe-infos__list__item--quantity');
 
       const breakRow = document.createElement('br');
 
@@ -84,6 +69,21 @@ export class RecipeView {
     return recipeIngredients;
   }
 
+  _getInfos(name, description, ingredients) {
+    const recipe = document.createElement('div');
+    recipe.classList.add('recipe');
+
+    const recipeName = document.createElement('h2');
+    recipeName.classList.add('recipe--name');
+    recipeName.textContent = name;
+
+    const recipeDescription = this._getInfosRecipes(description);
+    const recipeIngredient = this._getInfosIngredient(ingredients);
+
+    recipe.append(recipeName, recipeDescription, recipeIngredient);
+    return recipe;
+  }
+
   displayRecipe(id, image, name, time, description, ingredients) {
     const cards = this.cards;
 
@@ -91,11 +91,12 @@ export class RecipeView {
     const times = this._getTime(time);
     const infos = this._getInfos(name, description, ingredients);
 
-    const card = document.createElement('article');
+    const card = document.createElement('a');
     card.classList.add('card');
 
     SetAtt(card, 'data-id', id);
-    SetAtt(card, 'data-display', 'block');
+    SetAtt(card, 'href', '#');
+    SetAtt(card, 'tabindex', '0');
 
     card.append(images, times, infos);
     cards.appendChild(card);
