@@ -45,23 +45,23 @@
         background-color: transparent;
         border: none;
         font-size: 18px;
-        position: relative;
-        top: 6px;
-        right: 85px;
+        margin: 6px;
         width: 40px;
         height: 40px;
+        position: absolute;
+        right: 9em;
       }
       &--research {
         cursor: pointer;
-        position: relative;
-        top: 6px;
-        right: 78px;
+        color: #C6C6C6;
+        background-color: #1B1B1B;
+        border-radius: 10px;
+        border: none;
+        margin: 6px;
         height: 40px;
         width: 40px;
-        border: none;
-        border-radius: 10px;
-        color: $secondary-light;
-        background-color: $primary;
+        position: absolute;
+        right: 8em;
       }
     }
   }

@@ -29,8 +29,8 @@ export const recipes = [
       }
     ],
     "time": 10,
-    "description": "Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, le jus de 2 citrons et le sucre. Mixer jusqu'à avoir la consistence désirée",
-    "appliance": "Blender",
+    "description": "Mettre les glaçons à votre goût dans le mixeur, ajouter le lait, la crème de coco, le jus de 2 citrons et le sucre. Mixer jusqu'à avoir la consistence désirée",
+    "appliance": "Mixeur",
     "ustensils": ["Cuillère à Soupe", "Verres", "Presse citron" ]
   },
   {
@@ -629,8 +629,8 @@ export const recipes = [
         }
     ],
     "time": 15,
-    "description":"Coupez les fraises en morceaux, découpez la chaire de la pastèque en retirant les pépins. Mettre le tout dans le blender. Ajouter un cuillère à soupe de juste de citron ainsi que les glaçons. Ajoutez quelques feuilles de menthe pour plus de fraîcheur. Mixez le tout. Servir et déguster.",
-    "appliance": "Blender",
+    "description":"Coupez les fraises en morceaux, découpez la chaire de la pastèque en retirant les pépins. Mettre le tout dans le mixeur. Ajouter un cuillère à soupe de jus de citron ainsi que les glaçons. Ajoutez quelques feuilles de menthe pour plus de fraîcheur. Mixez le tout. Servir et déguster.",
+    "appliance": "Mixeur",
     "ustensils": ["Verres", "Couteau", "Presse citron"]
   },
   {
@@ -655,8 +655,8 @@ export const recipes = [
         }
     ],
     "time": 10,
-    "description":"Séparez 1/5ème d'Ananas ( une belle tranche qui servira pour la décoration des verres ), mettre le reste coupé en cubes au blender, ajouter la glace à la vanille et le lait. Mixez. Servir et décorer avec l'ananas restant. C'est prêt",
-    "appliance": "Blender",
+    "description":"Séparez 1/5ème d'Ananas ( une belle tranche qui servira pour la décoration des verres ), mettre le reste coupé en cubes au mixeur, ajouter la glace à la vanille et le lait. Mixez. Servir et décorer avec l'ananas restant. C'est prêt",
+    "appliance": "Mixeur",
     "ustensils": ["Verres", "Couteau"]
   },
   {
@@ -686,11 +686,14 @@ export const recipes = [
         {
             "ingredient": "Banane",
             "quantity": 1
+        },
+        {
+          "ingredient": "Glaçons",
         }
     ],
     "time": 0,
     "description":"Coupez les fruits en morceaux, ajouter le jus de citron et le lait ainsi que le sucre glace. Mixez. Ajoutez des glaçons si le lait n'a pas été mis au frais.",
-    "appliance": "Blender",
+    "appliance": "Mixeur",
     "ustensils": ["Couteau", "Verres", "Presse citron"]
   },
   {
@@ -953,7 +956,7 @@ export const recipes = [
     ],
     "time": 25,
     "description":"Verser de l'huile dans une cocotte minute couper les légumes et les verser dans l'huile chaude. Laisser cuire et remuer pendant 10 minutes. Passer aux mixer. Servir.",
-    "appliance": "Mixer",
+    "appliance": "Mixeur",
     "ustensils": ["Cocotte minute", "Couteau"]
   },
   {
@@ -1024,7 +1027,7 @@ export const recipes = [
     ],
     "time": 80,
     "description":"Émincer les blanc de poireaux et les faire chauffer dans 25 grammes de beurre. AJouter les pommes de terres coupées en morceaux. Ajouter l'eau et laisser mijoter pour 45 minutes. Chauffer l'oseille avec le beurre restant puis incorporer le tout. Mixez. Ajoutez la crème. Bon appetit.",
-    "appliance": "Mixer",
+    "appliance": "Mixeur",
     "ustensils": ["Casserole", "Couteau"]
   },
   {
@@ -1056,7 +1059,7 @@ export const recipes = [
     ],
     "time": 30,
     "description":"Prendre les pois chiches, les mettre dans le mixer avec de l'huile d'olive, ajouter le jus des 2 citrons et du paprika selon le gout.",
-    "appliance": "Mixer",
+    "appliance": "Mixeur",
     "ustensils": ["Cuillère en bois", "Presse citron"]
   },
   {
@@ -1082,7 +1085,7 @@ export const recipes = [
     ],
     "time": 60,
     "description":"Mettre tous les ingrédients dans une cocotte. ajouter de l'eau pour recouvrir l'ensemble et laisser cuire à petit feu pour 1 heure. Passer au mixer. Salez, poivrez. C'est prêt",
-    "appliance": "Mixer",
+    "appliance": "Mixeur",
     "ustensils": ["Casserole", "Cuillère en bois"]
   },
   {
@@ -1224,7 +1227,7 @@ export const recipes = [
     ],
     "time": 25,
     "description":"Éplucher les patates douces et coupez les en morceaux. Les faire cuire durant 20 minute dans une casserole d'eau bouillante. Passer au mixer en ajoutant la crème et l'huile d'olive à son gout. Salez, poivrez. Pressez l'orange et ajouter le jus à l'ensemble. Servir.",
-    "appliance": "Mixer",
+    "appliance": "Mixeur",
     "ustensils": ["Couteau", "Économe", "Cuillère en bois"]
   },
   {
@@ -1264,7 +1267,7 @@ export const recipes = [
     ],
     "time": 25,
     "description":"Éplucher les légumes, les couper en morceaux et les mettre à cuire dans une cocotte minute environ 15 minutes. Mixer en ajoutant le beurre, la crème. Ajouter le cumin et la noix de muscade.",
-    "appliance": "Mixer",
+    "appliance": "Mixeur",
     "ustensils": ["Cocotte minute", "Couteau", "Cuillère en bois"]
   },
   {
@@ -1434,10 +1437,13 @@ export const recipes = [
             "ingredient": "Bicarbonate",
             "quantity": 1,
             "unit": "cuillères à café"
+        },
+        {
+          "ingredient": "Glaçons",
         }
     ],
     "time": 10,
-    "description":"Dans un saladier mettre l'eau, le jus des citrons et le sucre. Bien mélanger. Ajouter le bicarbonate. Servir. Ajouter des glaçon et une feuille de menthe pour la déco.",
+    "description":"Dans un saladier mettre l'eau, le jus des citrons et le sucre. Bien mélanger. Ajouter le bicarbonate. Servir. Ajouter des glaçons et une feuille de menthe pour la déco.",
     "appliance": "Saladier",
     "ustensils": ["Cuillère en bois"]
   },
@@ -1738,8 +1744,8 @@ export const recipes = [
         }
     ],
     "time": 0,
-    "description":"Découper les fruits. Le passer au blender jusqu'à obtenir une texture liquide. Mettre au frais. Servir",
-    "appliance": "Blender",
+    "description":"Découper les fruits. Le passer au mixeur jusqu'à obtenir une texture liquide. Mettre au frais. Servir",
+    "appliance": "Mixeur",
     "ustensils": ["Couteau", "Verres"]
   },
   {

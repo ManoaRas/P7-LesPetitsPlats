@@ -1,7 +1,9 @@
-import { SetAtt } from '../utils/DOMUtil.js';
+import { LowerCase, NormalizeString, SetAtt } from '../utils/DOMUtil.js';
 
 export class SearchBarView {
-  constructor() {
+  constructor(recipes) {
+    this.recipes = recipes;
+
     // DOM elements
     this.searchBar = document.querySelector('.headers__container__bar');
 
@@ -15,6 +17,23 @@ export class SearchBarView {
     return label;
   }
 
+  _filterRecipesBySearch(inputValue) {
+    const filteredRecipes = [];
+    if (inputValue.length < 3) {
+      return filteredRecipes;
+    }
+
+    for (const recipe of this.recipes) {
+      const name = LowerCase(recipe.name);
+      const description = LowerCase(recipe.description);
+      const ingredients = recipe.ingredients.map((ingredient) => LowerCase(ingredient.ingredient));
+      if (name.includes(inputValue) || description.includes(inputValue) || ingredients.includes(inputValue)) {
+        filteredRecipes.push(recipe);
+      }
+    }
+    return filteredRecipes;
+  }
+
   _setInput() {
     const input = document.createElement('input');
 
@@ -24,6 +43,13 @@ export class SearchBarView {
     SetAtt(input, 'type', 'text');
     SetAtt(input, 'maxlength', '80');
     SetAtt(input, 'placeholder', 'Rechercher une recette, un ingrédient, ...');
+
+    input.addEventListener('input', () => {
+      const inputValue = LowerCase(input.value);
+      const filteredRecipes = this._filterRecipesBySearch(inputValue);
+      console.log(filteredRecipes);
+      return filteredRecipes;
+    });
 
     return input;
   }

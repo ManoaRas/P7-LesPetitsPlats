@@ -135,6 +135,33 @@ export class TagView {
   }
 
   // DEFINE METHODS
+  _defineBtnDelete(inputElement, tags) {
+    const btnDelete = document.createElement('button');
+    const btnDeleteIcon = document.createElement('i');
+
+    btnDelete.classList.add('search-tag--delete')
+    btnDeleteIcon.classList.add('fa-solid', 'fa-xmark');
+
+    SetAtt(btnDelete, 'type', 'reset');
+    SetAtt(btnDelete, 'aria-label', 'Searchbar button delete');
+
+    btnDelete.style.visibility = inputElement.value.length > 0 ? 'visible' : 'hidden';
+    inputElement.addEventListener('input', () => {
+      btnDelete.style.visibility = inputElement.value.length > 0 ? 'visible' : 'hidden';
+    });
+    btnDelete.addEventListener('click', () => {
+      inputElement.value = '';
+      btnDelete.style.visibility = 'hidden';
+      const labelName = LowerCase(inputElement.getAttribute('id'));
+      const filteredTags = tags.filter((tag) => LowerCase(tag).includes(LowerCase(inputElement.value)));
+      const unorderedList = document.querySelector(`.${NormalizeString(labelName)}-list`);
+      unorderedList.innerHTML = '';
+      this._createList(filteredTags, unorderedList);
+    });
+
+    btnDelete.append(btnDeleteIcon);
+    return btnDelete;
+  }
   _defineSearchTag(label, tags) {
     // Constante
     const searchTags = document.createElement('div');
@@ -147,7 +174,7 @@ export class TagView {
 
     // Set attribute
     SetAtt(inputItem, 'id', `${NormalizeString(labelName)}`)
-    SetAtt(inputItem, 'type', 'search');
+    SetAtt(inputItem, 'type', 'text');
     SetAtt(inputItem, 'tabindex', '0');
 
     // Add event listener
@@ -159,7 +186,9 @@ export class TagView {
       this._createList(filteredTags, unorderedList);
     });
 
-    searchTags.append(inputItem);
+    const deleteBtn = this._defineBtnDelete(inputItem, tags);
+
+    searchTags.append(inputItem, deleteBtn);
     return searchTags;
   }
   _defineTagsList(label, tags) {
