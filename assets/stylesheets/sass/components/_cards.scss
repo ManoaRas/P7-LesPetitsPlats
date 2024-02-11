@@ -52,17 +52,18 @@
 }
 // Recipe ingredients list
 .ingredients-list {
-  columns: 2;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   padding: 0;
   font-size: 14px;
   list-style: none;
   &__item {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
     margin-bottom: 20px;
-    &--text {
-      color: $primary;
-    }
-    &--quantity {
-      color: $secondary-dark;
-    }
+    &--text { color: $primary }
+    &--quantity { color: $secondary-dark }
   }
 }

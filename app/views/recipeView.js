@@ -56,12 +56,10 @@ export class RecipeView {
       const ingredientsListQuantity = document.createElement('span');
       ingredientsListQuantity.classList.add('ingredients-list__item--quantity');
 
-      const breakRow = document.createElement('br');
-
       ingredientsListText.textContent = `${ingredient.ingredient ? `${ingredient.ingredient}` : ' '}`;
       ingredientsListQuantity.textContent = `${ingredient.quantity ? `${ingredient.quantity}` : ' '} ${ingredient.unit ? `${ingredient.unit}` : ' '}`;
 
-      ingredientsList.append(ingredientsListText, breakRow, ingredientsListQuantity);
+      ingredientsList.append(ingredientsListText, ingredientsListQuantity);
       recipeIngredientsList.appendChild(ingredientsList);
     });
 

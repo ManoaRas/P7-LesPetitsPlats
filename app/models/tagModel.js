@@ -12,12 +12,18 @@ export class TagModel {
   }
 
   _addPropertyToSet(propertySet, value) {
-    return propertySet.add(value.toLowerCase());
+    console.log()
+    return propertySet.add(value);
   }
   render() {
     this.tags.forEach((recipe) => {
+      // INGREDIENTS
       recipe.ingredients.forEach((ingredient) => this._addPropertyToSet(this.uniqueProperties.ingredients, ingredient.ingredient));
-      this._addPropertyToSet(this.uniqueProperties.appliances, recipe.appliance);
+
+      // APPLIANCES
+      recipe.appliances.forEach((appliance) => this._addPropertyToSet(this.uniqueProperties.appliances, appliance));
+
+      // USTENSILS
       recipe.ustensils.forEach((ustensil) => this._addPropertyToSet(this.uniqueProperties.ustensils, ustensil));
     });
 

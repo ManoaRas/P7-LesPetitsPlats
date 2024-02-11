@@ -21,16 +21,17 @@ export class SearchBarView {
     const filteredRecipes = [];
     if (inputValue.length < 3) {
       return filteredRecipes;
-    }
-
-    for (const recipe of this.recipes) {
-      const name = LowerCase(recipe.name);
-      const description = LowerCase(recipe.description);
-      const ingredients = recipe.ingredients.map((ingredient) => LowerCase(ingredient.ingredient));
-      if (name.includes(inputValue) || description.includes(inputValue) || ingredients.includes(inputValue)) {
-        filteredRecipes.push(recipe);
+    } else {
+      for (const recipe of this.recipes) {
+        const name = LowerCase(recipe.name);
+        const description = LowerCase(recipe.description);
+        const ingredients = recipe.ingredients.map((ingredient) => LowerCase(ingredient.ingredient));
+        if (name.includes(inputValue) || description.includes(inputValue) || ingredients.includes(inputValue)) {
+          filteredRecipes.push(recipe);
+        }
       }
     }
+
     return filteredRecipes;
   }
 
