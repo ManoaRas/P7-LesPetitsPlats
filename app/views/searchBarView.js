@@ -43,17 +43,26 @@ export class SearchBarView {
 
   // FILTERS METHODS
   _filterRecipesBySearch(inputValue) {
-    const filteredRecipes = this.recipes.filter((recipe) => {
+    const filteredRecipes = [];
+    for (let i = 0; i < this.recipes.length; i++) {
+      const recipe = this.recipes[i];
       const { description, ingredients, name } = recipe;
 
-      const allDescription = LowerCase(description).includes(inputValue);
-      const allIngredients = ingredients.map((ingredient) => {
-        LowerCase(ingredient.ingredient);
-      }).includes(inputValue);
-      const allName = LowerCase(name).includes(inputValue);
-
-      return (allDescription || allIngredients || allName);
-    });
+      if (LowerCase(description).indexOf(inputValue) !== -1) {
+        filteredRecipes.push(recipe);
+      } else {
+        let found = false;
+        for (let j = 0; j < ingredients.length; j++) {
+          if (LowerCase(ingredients[j].ingredient).indexOf(inputValue) !== -1) {
+            filteredRecipes.push(recipe);
+            found = true;
+            break;
+          }
+        }
+        if (found) continue;
+        if (LowerCase(name).indexOf(inputValue) !== -1) filteredRecipes.push(recipe);
+      }
+    }
     this._updateWithFilteredRecipes(filteredRecipes, inputValue);
   }
 
@@ -86,7 +95,7 @@ export class SearchBarView {
     btnDelete.addEventListener('click', () => {
       inputElement.value = '';
       btnDelete.style.visibility = 'hidden';
-      this._filterRecipesBySearch(inputElement.value);
+      this._filterRecipesBySearch((inputElement.value));
     });
 
     btnDelete.append(btnDeleteIcon);
