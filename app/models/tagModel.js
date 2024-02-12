@@ -12,7 +12,6 @@ export class TagModel {
   }
 
   _addPropertyToSet(propertySet, value) {
-    console.log()
     return propertySet.add(value);
   }
   render() {

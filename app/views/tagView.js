@@ -107,10 +107,7 @@ export class TagView {
       return this.selectedTags.every((tag) => recipeTags.includes(tag));
     });
 
-    // Delete recipes currently displayed
-    const cards = document.querySelector('.cards');
-    cards.innerHTML = '';
-
+    this.cards.innerHTML = '';
     // Display filtered recipes
     if (!filteredRecipes.length) {
       this.cards.innerHTML = "<p>Aucune recette n'a été trouvée.</p>";
@@ -128,7 +125,7 @@ export class TagView {
 
     // Update the number of recipes displayed
     const numberText = document.querySelector('.filters--number')
-    numberText.textContent = `${filteredRecipes.length} recettes`;
+    numberText.textContent = `${filteredRecipes.length} ${filteredRecipes.length === 1 ? 'recette' : 'recettes'}`;
   }
 
   // RESET METHODS
@@ -140,7 +137,7 @@ export class TagView {
   }
 
   // SET METHODS
-  _setDeleteBtn(inputElement, tags) {
+  _setDeleteBtn(inputElement) {
     const btnDelete = document.createElement('button');
     const btnDeleteIcon = document.createElement('i');
 
@@ -171,7 +168,7 @@ export class TagView {
       }
       this.recipeTags.filter((tags) => tags[categoryList].filter((tag) => allTags.push(tag)));
       const items = Array.from(new Set(allTags)).sort();
-      items.filter((item) => {
+      items.filter(() => {
         if (this.visibleItems.length > 0) {
           list.classList.remove('disabled');
         } else {
@@ -199,7 +196,7 @@ export class TagView {
     btnSearch.appendChild(iconSearch);
     return btnSearch;
   }
-  _setInputTagsSearch(label, tags) {
+  _setInputTagsSearch(label) {
     // Constante
     const searchTags = document.createElement('div');
     const inputItem = document.createElement('input');
@@ -254,7 +251,7 @@ export class TagView {
       });
     });
 
-    const deleteBtn = this._setDeleteBtn(inputItem, tags);
+    const deleteBtn = this._setDeleteBtn(inputItem);
     const searchBtn = this._setSearchBtn();
     searchTags.append(inputItem, deleteBtn, searchBtn);
     return searchTags;
@@ -294,7 +291,7 @@ export class TagView {
   }
   _setTagsSearch(label, tags) {
     const dropdownTag = document.createElement('div');
-    const searchTags = this._setInputTagsSearch(label, tags); // Item input + btnIcon
+    const searchTags = this._setInputTagsSearch(label); // Item input + btnIcon
     const tagsList = this._setTagsList(label, tags); // Tags lists
 
     dropdownTag.classList.add('dropdown--items');
