@@ -170,7 +170,9 @@ export class TagView {
       const items = Array.from(new Set(allTags)).sort();
       items.filter(() => {
         if (this.visibleItems.length > 0) {
-          list.classList.remove('disabled');
+          this.visibleItems.filter((list) => {
+            list.classList.remove('disabled');
+          })
         } else {
           const listItems = document.querySelectorAll(`.${labelName}-list .list--item`);
           listItems.forEach((list) => {
